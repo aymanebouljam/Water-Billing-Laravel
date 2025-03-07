@@ -24,7 +24,7 @@ class PartController extends Controller
                 'data' => $parts,
             ]);
         }catch(\Exception $e){
-            \Log::error('Error while fetching pièces '. $e->getMessage());
+            \Log::error('Error while fetching Parts '. $e->getMessage());
             return response()->json([
                 'message' => 'Erreur lors de récupération des pièces',
             ]);
@@ -36,28 +36,36 @@ class PartController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'label' => 'required',
-            'price' => 'required|numeric'
-        ],[
-            'label.required' => 'Veuillez saisir la désignation de la pièce',
-            'price.required' => 'Veuillez saisir le prix de la pièce',
-            'price.numeric' => 'Le prix doit être numérique',
-        ]);
-
-        $part = Part::create([
-            'label' => $request->label,
-            'price' => $request->price,
-        ]);
-
-        if($part){
-            return response()->json([
-                'message' => 'Pièce ajoutée avec succés',
+        try{
+            $request->validate([
+                'label' => 'required',
+                'price' => 'required|numeric'
+            ],[
+                'label.required' => 'Veuillez saisir la désignation de la pièce',
+                'price.required' => 'Veuillez saisir le prix de la pièce',
+                'price.numeric' => 'Le prix doit être numérique',
             ]);
-        }else{
-            return response()->json([
-                'message' => 'Echec de création de la pièce',
+    
+            $part = Part::create([
+                'label' => $request->label,
+                'price' => $request->price,
             ]);
+    
+            if($part){
+                return response()->json([
+                    'message' => 'Pièce ajoutée avec succés',
+                ]);
+            }else{
+                return response()->json([
+                    'message' => 'Echec de création de la pièce',
+                ]);
+            }
+        }catch(\Exception $e){
+            \Log::error('Error while storing part '. $e->getMessage());
+            return response()->json([
+                'message' => 'Erreur lors de création de la pièce',
+            ]);
+
         }
     }
 
@@ -117,13 +125,7 @@ class PartController extends Controller
      */
     public function destroy(Part $part)
     {
-        \Log::info('Part', [$part]);
         try{
-            if(!$part){
-                return response()->json([
-                    'message' => 'Pièce non trouvée'
-                ]);
-            }
             $result = $part->delete();
             if($result){
                 return response()->json([

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PartController;
 use App\Http\Controllers\Api\TaxController;
+use App\Http\Controllers\Api\InvoiceController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -23,3 +24,11 @@ Route::controller(TaxController::class)->group(function(){
     Route::put('/taxes/{tax}/update', 'update')->name('taxes.update');
     Route::delete('/taxes/{tax}', 'destroy')->name('taxes.destroy');
 });
+
+Route::controller(InvoiceController::class)->group(function(){
+    Route::get('/invoices', 'index')->name('invoices.index');
+    Route::post('/invoices', 'store')->name('invoices.store');
+    Route::put('/invoices/{invoice}/update', 'update')->name('invoices.update');
+    Route::delete('/invoices/{invoice}', 'destroy')->name('invoices.destroy');
+});
+
