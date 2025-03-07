@@ -13,11 +13,21 @@ class PartController extends Controller
      */
     public function index()
     {
-        $parts = Part::all();
-        if($parts){
-            return response()->json(['data' => $parts]);
-        }else{
-            return response()->json(['message' => 'Aucune pièces disponible']);
+        try{
+            $parts = Part::all();
+            if(!$parts){
+                return response()->json([
+                    'message' => 'Aucune pièce trouvée'
+                ]);
+            }
+            return response()->json([
+                'data' => $parts,
+            ]);
+        }catch(\Exception $e){
+            \Log::error('Error while fetching pièces '. $e->getMessage());
+            return response()->json([
+                'message' => 'Erreur lors de récupération des pièces',
+            ]);
         }
     }
 
@@ -107,6 +117,7 @@ class PartController extends Controller
      */
     public function destroy(Part $part)
     {
+        \Log::info('Part', [$part]);
         try{
             if(!$part){
                 return response()->json([
@@ -126,7 +137,7 @@ class PartController extends Controller
         }catch(\Exception $e){
             \Log::error('Error while deleting part: '. $e->getMessage());
             return response()->json([
-                'Erreur' => 'Erreur lors de suppression de la pièce',
+                'message' => 'Erreur lors de suppression de la pièce',
             ]);
         }
     }

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PartController;
+use App\Http\Controllers\Api\TaxController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -14,4 +15,11 @@ Route::controller(PartController::class)->group(function(){
     Route::post('/parts','store')->name('parts.store');
     Route::put('/parts/{part}/update','update')->name('parts.update');
     Route::delete('/parts/{part}', 'destroy')->name('parts.destroy');
+});
+
+Route::controller(TaxController::class)->group(function(){
+    Route::get('/taxes', 'index')->name('taxes.index');
+    Route::post('/taxes', 'store')->name('taxes.store');
+    Route::put('/taxes/{tax}/update', 'update')->name('taxes.update');
+    Route::delete('/taxes/{tax}', 'destroy')->name('taxes.destroy');
 });
