@@ -92,47 +92,47 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, Invoice $invoice)
     {
-        try{
-            $request->validate([
-                'subject' => 'required',
-                'option' => 'required',
-                'client' => "required|regex:/^[\p{L}\s'-]+$/u",
-                'contract' => 'numeric',
-                'counters' => 'required|numeric',
-            ],[
-                'subject.required' => 'Veuillez saisir l\'objet de la facture',
-                'option.required' => 'Veuillez saisir le type d\'opération',
-                'client.required' => 'Veuillez saisir le nom du client',
-                'client.regex' => 'Le nom du client doit être alphabétique',
-                'contract.numeric' => 'Le numéro de contract doit être numérique',
-                'counters.required' => 'Veuillez indiquer le nombre des compteurs',
-                'counters.numeric' => 'Le nombre de compteurs doit être numérique',
-            ]);
+        // try{
+        //     $request->validate([
+        //         'subject' => 'required',
+        //         'option' => 'required',
+        //         'client' => "required|regex:/^[\p{L}\s'-]+$/u",
+        //         'contract' => 'numeric',
+        //         'counters' => 'required|numeric',
+        //     ],[
+        //         'subject.required' => 'Veuillez saisir l\'objet de la facture',
+        //         'option.required' => 'Veuillez saisir le type d\'opération',
+        //         'client.required' => 'Veuillez saisir le nom du client',
+        //         'client.regex' => 'Le nom du client doit être alphabétique',
+        //         'contract.numeric' => 'Le numéro de contract doit être numérique',
+        //         'counters.required' => 'Veuillez indiquer le nombre des compteurs',
+        //         'counters.numeric' => 'Le nombre de compteurs doit être numérique',
+        //     ]);
     
-            $result = $invoice->update([
-                'subject' => $request->subject,
-                'option' => $request->option,
-                'client' => $request->client,
-                'contract' => $request->contract,
-                'counters' => $request->counters
-            ]);
+        //     $result = $invoice->update([
+        //         'subject' => $request->subject,
+        //         'option' => $request->option,
+        //         'client' => $request->client,
+        //         'contract' => $request->contract,
+        //         'counters' => $request->counters
+        //     ]);
     
-            if($invoice){
-                return response()->json([
-                    'message' => 'Facture modifiée avec succés',
-                ]);
-            }else{
-                return response()->json([
-                    'message' => 'Echec de modification de la facture',
-                ]);
-            }
-        }catch(\Exception $e){
-            \Log::error('Error while updating invoice '. $e->getMessage());
-            return response()->json([
-                'message' => 'Erreur lors de modification de la facture',
-            ]);
+        //     if($invoice){
+        //         return response()->json([
+        //             'message' => 'Facture modifiée avec succés',
+        //         ]);
+        //     }else{
+        //         return response()->json([
+        //             'message' => 'Echec de modification de la facture',
+        //         ]);
+        //     }
+        // }catch(\Exception $e){
+        //     \Log::error('Error while updating invoice '. $e->getMessage());
+        //     return response()->json([
+        //         'message' => 'Erreur lors de modification de la facture',
+        //     ]);
 
-        }
+        // }
     }
 
     /**
