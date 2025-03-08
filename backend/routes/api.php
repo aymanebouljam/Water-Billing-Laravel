@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PartController;
 use App\Http\Controllers\Api\TaxController;
 use App\Http\Controllers\Api\InvoiceController;
+use App\Http\Controllers\Api\BillController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Bill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 
 class BillController extends Controller
 {
@@ -46,10 +48,12 @@ class BillController extends Controller
                 array_push($data, [
                     'invoiceId' => $invoiceId,
                     'partId' => $part['partId'],
-                    'quantity' => $part['quantity']
+                    'quantity' => $part['quantity'],
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ]);
             }
-            \log::info('Data array', $data);
+            log::info('Data array', $data);
             Bill::insert($data);
 
             return response()->json([
@@ -57,7 +61,7 @@ class BillController extends Controller
             ]);
 
         }catch(\Exception $e){
-            \Log::error('Error while storing Bill '. $e->getMessage());
+            log::error('Error while storing Bill '. $e->getMessage());
             return response()->json(['message' => 'Erreur survenue lors d\'exécution de l\'opération demandée']);
         }
     }
