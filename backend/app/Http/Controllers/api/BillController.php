@@ -23,22 +23,37 @@ class BillController extends Controller
     {
         try{
             $request->validate([
-                'invoiceId' => 'required|numeric',
-                'partId' => 'required|numeric',
-                'quantity' => 'required|numeric',
+                'invoiceId' => 'required|exists:invoices,id',
+                'parts' => 'required|array',
+                'parts.*.partId' => 'required|exists:parts,id',
+                'parts.*.quantity' => 'required|numeric|min:1',
             ],[
-                'invoiceId.required' => 'Veuillez remplir le formulaire avant de choisir les pièces',
-                'invoiceId.numeric' => 'Le numéro de facture doit être numérique',
-                'partId.required' => 'Veuillez choisir au minimum une pièce',
-                'partId.numeric' => 'le code de pièce doit être numérique',
-                'quantity.required' => 'Veuillez indiquer la quantité',
-                'quantity.numeric' => 'La quantité doit être numérique'
+                'invoiceId.required' => 'L\'ID de la facture est requis.',
+                'invoiceId.exists' => 'Cette facture n\'existe pas.',
+                'parts.required' => 'Les pièces sont requises.',
+                'parts.array' => 'Les pièces doivent être un tableau.',
+                'parts.*.partId.required' => 'L\'ID de la pièce est requis.',
+                'parts.*.partId.exists' => 'Cette pièce n\'existe pas.',
+                'parts.*.quantity.required' => 'La quantité est requise.',
+                'parts.*.quantity.numeric' => 'La quantité doit être un nombre.',
+                'parts.*.quantity.min' => 'La quantité doit être au moins 1.',
             ]);
 
-            $bill = Bill::create([
-                'invoiceId' => $request->invoiceId,
-                'partId' => $request->partId,
-                'quantity' => $request->quantity
+            $invoiceId = $request->invoiceId;
+            $parts = $request->parts;
+            $data = [];
+            foreach($parts as $part){
+                array_push($data, [
+                    'invoiceId' => $invoiceId,
+                    'partId' => $part['partId'],
+                    'quantity' => $part['quantity']
+                ]);
+            }
+            \log::info('Data array', $data);
+            Bill::insert($data);
+
+            return response()->json([
+                'message' => 'Facture EG crée avec succés'
             ]);
 
         }catch(\Exception $e){
