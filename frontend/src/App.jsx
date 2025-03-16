@@ -5,6 +5,7 @@ import InvoiceCreate from './components/frontend/Invoice/Create'
 import InvoiceParts from './components/frontend/Invoice/Parts' 
 import Invoices from './components/backend/Invoices'
 import Parts from './components/backend/Parts'
+import Taxes from './components/backend/Taxes'
 
 function App() {
  
@@ -19,6 +20,7 @@ function App() {
           <Route path='invoice/parts' element={<InvoiceParts />} />
           <Route path='invoices' element={<Invoices />} />
           <Route path='parts' element={<Parts />} />
+          <Route path='taxes' element={<Taxes />} />
         </Route>
       </Routes>
     </BrowserRouter>

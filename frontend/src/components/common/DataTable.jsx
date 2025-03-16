@@ -1,12 +1,37 @@
 import MUIDataTable from "mui-datatables";
 
+
+
 const options = {
     filterType: "checkbox",
-    pagination: true,
-};
+    rowsPerPage: 3,
+    language: {
+      body: {
+        noMatch: "Aucune donnée disponible",
+        toolTip: "Trier",
+      },
+      pagination: {
+        next: "Suivant",
+        previous: "Précédent",
+        rowsPerPage: "Lignes par page",
+        displayRows: "de",
+      },
+      toolbar: {
+        search: "Rechercher",
+        downloadCsv: "Télécharger CSV",
+      },
+      filter: {
+        all: "Tous",
+        title: "Filtres",
+        reset: "Réinitialiser",
+      },
+    },
+  };
 
 
-function DataTable({data, columns}) {
-    return <MUIDataTable title={"User List"} data={data} columns={columns} options={options} />;
+
+
+function DataTable({title, data, columns}) {
+    return <MUIDataTable title={title} data={data} columns={columns} options={options} pageSize={3} />
 }
 export default DataTable
