@@ -6,8 +6,8 @@ function Layout(){
     return(
         <>
             <NavBar />
-            <div className="flex items-center">
-                <div className="h-screen inline-block"> 
+            <div className="flex ">
+                <div className="h-screen inline-block bg-red-300"> 
                     <SideBar />
                 </div> 
                 <Outlet />
