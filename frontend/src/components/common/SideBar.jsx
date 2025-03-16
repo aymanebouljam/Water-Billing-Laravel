@@ -1,18 +1,18 @@
 import { Link } from "react-router-dom"
-import { ArrowRightStartOnRectangleIcon, CogIcon, DocumentCurrencyDollarIcon, HomeIcon, PencilIcon, PresentationChartLineIcon } from "@heroicons/react/24/solid";
+import { ArrowRightStartOnRectangleIcon, CogIcon, DocumentCurrencyDollarIcon, HomeIcon, PencilIcon, PencilSquareIcon, PresentationChartLineIcon } from "@heroicons/react/24/solid";
 
 
 function SideBar(){
     return (
         <>
-            <div className="sideBar h-full  w-56 bg-gray-200 text-black font-600 text-lg">
-                <ul className="flex flex-col items-center h-full md:gap-y-4 2xl:xl:gap-y-8  p-4">
+            <div className="sideBar h-screen w-56 bg-gray-200 text-black font-600 text-lg">
+                <ul className=" h-full flex flex-col items-center md:gap-y-4 2xl:xl:gap-y-8  p-6">
                     <li className="link">
                         <HomeIcon className="icon"></HomeIcon>
                         <Link to='/'>Acceuil</Link>
                     </li>
                     <li className="link">
-                        <PencilIcon className="icon"></PencilIcon>
+                        <PencilIcon className="w-8 h-8" />
                         <Link to='/'>Nouveau</Link>
                     </li>
                     <li className="link">
@@ -27,7 +27,7 @@ function SideBar(){
                         <PresentationChartLineIcon className="icon" />
                         <Link to='/'>Pièces</Link>
                     </li>
-                    <li className=" bg- flex items-center bg-waterBlue justify-center gap-x-2  rounded-lg p-4 hover:bg-sky-700">
+                    <li className="flex items-center bg-secondaryBlue justify-center gap-x-2  rounded-lg p-4 hover:bg-primaryBlue">
                         <ArrowRightStartOnRectangleIcon className="min-w-6 min-h-6" />
                         <Link to='/'>Déconnexion</Link>
                     </li>

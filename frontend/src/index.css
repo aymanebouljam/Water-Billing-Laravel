@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html, body{
-    @apply h-screen;
+    @apply h-screen flex flex-col;
 }
 #root{
     @apply h-full;
@@ -13,6 +13,6 @@ html, body{
 }
 
 .sideBar .link{
-    @apply flex items-center justify-center gap-x-5  rounded-lg p-4 w-3/4  hover:bg-gray-50;
+    @apply flex items-center gap-x-4 rounded-lg p-4 w-full hover:bg-gray-50;
 }
 

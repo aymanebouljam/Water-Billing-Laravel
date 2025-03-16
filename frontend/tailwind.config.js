@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       colors : {
-         waterBlue : "#1DA1F2",
+          primaryBlue : "#2c7cbc",
+          secondaryBlue : "#8acde8"
       }
     },
   },

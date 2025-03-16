@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import NavBar from './components/common/NavBar'
-import SideBar from './components/common/SideBar'
+import Home from './components/common/frontend/Home'
+import Layout from './components/Layout'
 
 function App() {
  
@@ -8,9 +8,11 @@ function App() {
   return (
     <>
     <BrowserRouter> 
-    <NavBar /> 
-    <SideBar /> 
-     
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<Home />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
       
     </>
