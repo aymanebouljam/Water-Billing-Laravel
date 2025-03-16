@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from './components/common/frontend/Home'
+import Home from './components/frontend/Home'
 import Layout from './components/Layout'
-import InvoiceCreate from './components/common/frontend/Invoice/Create' 
-import InvoiceParts from './components/common/frontend/Invoice/Parts' 
+import InvoiceCreate from './components/frontend/Invoice/Create'
+import InvoiceParts from './components/frontend/Invoice/Parts' 
 
 function App() {
  
