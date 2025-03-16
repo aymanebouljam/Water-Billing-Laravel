@@ -28,4 +28,10 @@ form .input{
     background-size: cover;
     background-repeat: no-repeat;
 }
+table, th, td{
+    @apply border-2 border-collapse;
+}
+table{
+    @apply w-full;
+}
 
