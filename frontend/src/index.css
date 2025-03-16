@@ -16,3 +16,16 @@ html, body{
     @apply flex items-center gap-x-4 rounded-lg p-4 w-full hover:bg-gray-50;
 }
 
+form .input{
+    @apply  border-2 p-4 rounded-xl my-3;
+}
+
+.home{
+    background: url('/src/assets/images/');
+}
+.container{
+    background: url('/src/assets/images/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
