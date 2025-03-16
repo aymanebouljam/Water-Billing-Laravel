@@ -17,15 +17,15 @@ function SideBar(){
                     </li>
                     <li className="link">
                         <DocumentCurrencyDollarIcon className="icon" />
-                        <Link to=''>Facture</Link>
+                        <Link to='/invoices'>Facture</Link>
                     </li>
                     <li className="link">
                         <CogIcon className="icon" />
-                        <Link to='/'>Pièces</Link>
+                        <Link to='/parts'>Pièces</Link>
                     </li>
                     <li className="link">
                         <PresentationChartLineIcon className="icon" />
-                        <Link to='/'>Taxes</Link>
+                        <Link to='/taxes'>Taxes</Link>
                     </li>
                     <li className="flex items-center bg-secondaryBlue justify-center gap-x-2  rounded-lg p-4 hover:bg-primaryBlue hover:text-white">
                         <ArrowRightStartOnRectangleIcon className="min-w-6 min-h-6" />
