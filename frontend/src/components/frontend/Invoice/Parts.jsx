@@ -1,4 +1,4 @@
-import DataTable from "../../DataTable"
+import DataTable from "../../common/DataTable"
 function Parts(){
     const columns = ["ID", "Désignation", "Prix Unitaire", "Quantité"]
     const data = [
