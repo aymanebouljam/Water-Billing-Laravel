@@ -5,7 +5,7 @@ import { ArrowRightStartOnRectangleIcon, CogIcon, DocumentCurrencyDollarIcon, Ho
 function SideBar(){
     return (
         <>
-            <div className="sideBar h-screen w-56 bg-gray-200 text-black font-600 text-lg">
+            <div className="sideBar h-screen bg-gray-200 text-black font-600 text-lg">
                 <ul className=" h-full flex flex-col items-center md:gap-y-4 2xl:xl:gap-y-8  p-6">
                     <li className="link">
                         <HomeIcon className="icon"></HomeIcon>
@@ -13,11 +13,11 @@ function SideBar(){
                     </li>
                     <li className="link">
                         <PencilIcon className="w-8 h-8" />
-                        <Link to='/'>Nouveau</Link>
+                        <Link to='/invoice/create'>Nouveau</Link>
                     </li>
                     <li className="link">
                         <DocumentCurrencyDollarIcon className="icon" />
-                        <Link to='/'>Facture</Link>
+                        <Link to=''>Facture</Link>
                     </li>
                     <li className="link">
                         <CogIcon className="icon" />

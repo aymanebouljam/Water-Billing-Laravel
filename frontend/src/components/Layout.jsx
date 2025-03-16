@@ -6,10 +6,14 @@ function Layout(){
     return(
         <>
             <NavBar />
-            <div className="flex items-center justify-center">
-                <SideBar />
+            <div className="flex items-center">
+                <div className="h-screen inline-block"> 
+                    <SideBar />
+                </div> 
                 <Outlet />
             </div>
+           
+           
         </>
     )
 }   
