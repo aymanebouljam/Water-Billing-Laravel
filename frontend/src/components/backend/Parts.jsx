@@ -8,7 +8,7 @@ function Parts(){
     ]
     return(
         <div className="px-4 py-16 w-full">
-            <DataTable data={data} columns={columns}/>
+            <DataTable title='Gérer les Pièces' data={data} columns={columns}/>
         </div>
     )
 }
