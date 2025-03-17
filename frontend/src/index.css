@@ -45,9 +45,12 @@ table{
 .error{
     @apply text-red-600 font-medium px-3 py-1;
 }
+
+
 table.dataTable{
     @apply   bg-white/5  backdrop-blur-lg shadow-lg rounded-2xl rounded-t-3xl
 }
+
 table.dataTable tr{
     @apply hover:font-medium
 }

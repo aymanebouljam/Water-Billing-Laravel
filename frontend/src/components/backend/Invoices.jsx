@@ -2,14 +2,14 @@ import {  useEffect, useState } from "react";
 import DataTable from "../common/DataTable";
 import { URL } from '../common/URL'
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { TrashIcon } from "@heroicons/react/24/solid";
 function Invoices(){
-    const navigate = useNavigate()
+    const [id, setId] = useState(null)
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState();
-    const queryParams = new URLSearchParams(window.location.search)
-    const message = queryParams.get('message')
+    const [mapped, setMapped] = useState([])
+   
+   
 
 
     const columns = ['ID', 'Subject', 'Client', 'Contract', 'Counters', 'Total', 'Action']
@@ -33,19 +33,53 @@ function Invoices(){
         getInvoices()
     },[])
     //map data into 2D Array
-    const mapped = data.map(el => ([
-        el.id,
-        el.type || 'Déplacement de la niche',
-        el.client.toUpperCase(),
-        el.contract || 'N/A',
-        el.counter,
-        el.total || 'N/A',
-        <button onClick={() => {
-             if (confirm('Confirmez la suppression')) navigate(`/invoice/delete/${parseInt(el.id)}`)
-        }}>
-            <TrashIcon className="w-4 h-4" />
-        </button>
-    ]));
+    useEffect(()=>{
+        if(data.length > 0){
+            setMapped(data.map(el => ([
+                el.id,
+                el.type || 'Déplacement de la niche',
+                el.client.toUpperCase(),
+                el.contract || 'N/A',
+                el.counter,
+                el.total || 'N/A',
+                <button onClick={() => {
+                    if (confirm('Confirmez la suppression')){
+                        setId(el.id)
+                    } 
+                }}>
+                    <TrashIcon className="w-4 h-4" />
+                </button>
+            ])))
+        }else{
+            setMapped([
+            ['','','','Aucun élément Disponible','','','']
+        ])
+        }
+    
+    },[data])
+
+
+
+    //Delete an invoice
+    useEffect(()=>{
+        const deleteInvoice = async () => {
+            if (!id) return
+            try {
+                const res = await axios.delete(`${URL}invoices/${id}`)
+                if (res.data.error) {
+                    throw new Error(res.data.error)
+                } else {
+                    alert(res.data.message)
+                    window.location.reload()
+                }
+            } catch (err) {
+                console.error(err)
+                alert(err)
+            }
+        }; deleteInvoice()
+    },[id])
+
+
 
 
     return(
