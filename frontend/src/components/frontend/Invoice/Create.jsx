@@ -110,7 +110,7 @@ function Create(){
         }
         if(errors !== null){
             try{
-                const res = await axios.post('http://127.0.0.1:8000/api/invoices',formData)
+                const res = await axios.post(`${URL}invoices`,formData)
                 if(res.data.error){
                     throw new Error(res.data.error)
                 }else{
