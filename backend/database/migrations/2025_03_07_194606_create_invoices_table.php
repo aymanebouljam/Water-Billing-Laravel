@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->string('subject');
-            $table->string('option');
+            $table->string('type');
             $table->string('client');
-            $table->unsignedBigInteger('contract');
-            $table->unsignedBigInteger('counters');
+            $table->unsignedBigInteger('contract')->nullable();
+            $table->unsignedBigInteger('counter');
             $table->decimal('total', 10,2)->nullable();
             $table->timestamps();
         });
