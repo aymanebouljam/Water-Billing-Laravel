@@ -17,7 +17,7 @@ class InvoiceController extends Controller
             $invoices = Invoice::all();
             if(!$invoices){
                 return response()->json([
-                    'message' => 'Aucune facture trouvée'
+                    'error' => 'Aucune facture trouvée'
                 ]);
             }
             return response()->json([
@@ -26,7 +26,7 @@ class InvoiceController extends Controller
         }catch(\Exception $e){
             \Log::error('Error while fetching Invoices '. $e->getMessage());
             return response()->json([
-                'message' => 'Erreur lors de récupération des factures',
+                'error' => $e->getMessage(),
             ]);
         }
     }
@@ -39,14 +39,13 @@ class InvoiceController extends Controller
         try{
             $request->validate([
                 'subject' => 'required',
-                'type' => 'required',
+                'type' => 'nullable',
                 'client' => "required|regex:/^[\p{L}\s'-]+$/u",
-                'contract' => 'numeric',
+                'contract' => 'nullable|numeric',
                 'counter' => 'required|numeric',
-                'total' => 'numeric',
+                'total' => 'nullable|numeric',
             ],[
                 'subject.required' => 'Veuillez saisir l\'objet de la facture',
-                'type.required' => 'Veuillez saisir le type d\'opération',
                 'client.required' => 'Veuillez saisir le nom du client',
                 'client.regex' => 'Le nom du client doit être alphabétique',
                 'contract.numeric' => 'Le numéro de contract doit être numérique',
@@ -151,13 +150,13 @@ class InvoiceController extends Controller
                 ]);
             }else{
                 return response()->json([
-                    'message' => 'Echec de suppression de la facture',
+                    'error' => 'Echec de suppression de la facture',
                 ]);
             }
         }catch(\Exception $e){
             \Log::error('Error while deleting part: '. $e->getMessage());
             return response()->json([
-                'message' => 'Erreur lors de suppression de la facture',
+                'error' => $e->getMessage(),
             ]);
         }
     }
