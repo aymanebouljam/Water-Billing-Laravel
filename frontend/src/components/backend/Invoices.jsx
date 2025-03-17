@@ -8,6 +8,9 @@ function Invoices(){
     const navigate = useNavigate()
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState();
+    const queryParams = new URLSearchParams(window.location.search)
+    const message = queryParams.get('message')
+
 
     const columns = ['ID', 'Subject', 'Client', 'Contract', 'Counters', 'Total', 'Action']
     // fetchInvoices
@@ -32,12 +35,14 @@ function Invoices(){
     //map data into 2D Array
     const mapped = data.map(el => ([
         el.id,
-        el.type.at(0).toUpperCase()+el.type.slice(1) || 'Déplacement de la niche',
+        el.type || 'Déplacement de la niche',
         el.client.toUpperCase(),
         el.contract || 'N/A',
         el.counter,
         el.total || 'N/A',
-        <button onClick={() => navigate(`/invoice/delete/${el.id}`)}>
+        <button onClick={() => {
+             if (confirm('Confirmez la suppression')) navigate(`/invoice/delete/${parseInt(el.id)}`)
+        }}>
             <TrashIcon className="w-4 h-4" />
         </button>
     ]));

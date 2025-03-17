@@ -12,9 +12,12 @@ function Create(){
         client : '',
         subject : '',
         type : '',
-        counter : ''
+        counter : '',
+        contract : ''
     })
+ 
     const [errors, setErrors] = useState({});
+ 
 
     //Handle input change
     const handleChange = (e) => {
@@ -33,16 +36,16 @@ function Create(){
         switch(subject){
             case 'nouveau branchement' :
                     setType([
-                        {value:'branchement 2/3', label:'Branchement de 25'},
-                        {value:'branchement 1"1/2', label:'Branchement de 50'}
+                        {value:'Branchement 2/3', label:'Branchement de 25'},
+                        {value:'Branchement 1"1/2', label:'Branchement de 50'}
                     ])
                 setContract(false);
                 break;
             case 'modification de branchement':
                  setType([
-                    {value:'modification 1/2 au 2/3', label:'modification de 20 au 25'},
-                    {value:'modification 1/2 au 1"1/2', label:'modification de 20 au 50'},
-                    {value:'modification 2/3 au 1"1/2', label:'modification de 25 au 50'},
+                    {value:'Modification 1/2 au 2/3', label:'Modification de 20 au 25'},
+                    {value:'Modification 1/2 au 1"1/2', label:'Modification de 20 au 50'},
+                    {value:'Modification 2/3 au 1"1/2', label:'Modification de 25 au 50'},
                 ])
                 setContract(true);
                 break;
@@ -63,7 +66,8 @@ function Create(){
             client : '',
             subject : '',
             type : '',
-            counter : ''
+            counter : '',
+            contract : ''
         })
         setErrors({})
     }
@@ -86,8 +90,11 @@ function Create(){
             case formData.subject === '':
                 newErrors.subject = 'Object de Branchement est obligatoire'
                 break;
-            case formData.type === '':
+            case type.length>0 && formData.type === '':
                 newErrors.type = 'Type de Branchement est obligatoire'
+                break;
+            case !contract:
+                delete formData.contract 
                 break;
             case contract && formData.contract === '':
                 newErrors.contract = 'N° de Contract est obligatoire'
@@ -106,6 +113,7 @@ function Create(){
         }
         if(Object.keys(newErrors).length > 0){
             setErrors(newErrors)
+            console.log(newErrors.counter)
             return;
         }else{
             setErrors({})
@@ -114,7 +122,9 @@ function Create(){
             try{
                 const res = await axios.post(`${URL}invoices`,formData)
                 if(res.data.error){
+                    console.error(res.data.error)
                     throw new Error(res.data.error)
+                    
                 }else{
                     alert(res.data.message)
                     navigate('/invoice/parts')
@@ -135,9 +145,9 @@ function Create(){
                 }
                 <select className="input" id="subject" name="subject" onChange={handleSelect} value={formData.subject}>
                     <option value="">-- Objet de Branchement --</option>
-                    <option value="nouveau branchement">Nouveau Branchement</option>
-                    <option value="modification de branchement">Modification de branchement</option>
-                    <option value="déplacement de la niche">Déplacement de la niche</option>
+                    <option value="Nouveau branchement">Nouveau Branchement</option>
+                    <option value="Modification de branchement">Modification de branchement</option>
+                    <option value="Déplacement de la niche">Déplacement de la niche</option>
                 </select>
                 {
                     showError('subject')
