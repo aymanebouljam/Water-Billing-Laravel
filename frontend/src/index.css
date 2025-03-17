@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 html, body{
-    @apply h-screen flex flex-col;
+    @apply h-screen ;
 }
 #root{
-    @apply h-full;
+    @apply h-screen flex flex-col;
 }
 .icon{
     @apply w-8 h-8;
@@ -17,7 +17,7 @@ html, body{
 }
 
 form .input{
-    @apply  border-2 p-4 rounded-xl my-3;
+    @apply  border-2 p-3 rounded-xl my-3;
 }
 
 .home{
@@ -36,4 +36,6 @@ table, th, td{
 table{
     @apply w-full;
 }
-
+.error{
+    @apply text-red-600 font-medium px-3 py-1;
+}
