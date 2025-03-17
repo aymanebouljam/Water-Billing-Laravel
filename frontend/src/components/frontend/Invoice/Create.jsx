@@ -10,7 +10,6 @@ function Create(){
         client : '',
         subject : '',
         type : '',
-        contract : '',
         counter : ''
     })
     const [errors, setErrors] = useState({});
@@ -62,7 +61,6 @@ function Create(){
             client : '',
             subject : '',
             type : '',
-            contract : '',
             counter : ''
         })
         setErrors({})
@@ -112,7 +110,7 @@ function Create(){
         }
         if(errors !== null){
             try{
-                const res = await axios.post(`${URL}/invoices`,formData)
+                const res = await axios.post('http://127.0.0.1:8000/api/invoices',formData)
                 if(res.data.error){
                     throw new Error(res.data.error)
                 }else{
