@@ -3,7 +3,6 @@ import Home from './components/frontend/Home'
 import Layout from './components/Layout'
 import InvoiceCreate from './components/frontend/Invoice/Create'
 import InvoiceParts from './components/frontend/Invoice/Parts' 
-import InvoiceDelete from './components/frontend/Invoice/Delete' 
 import Invoices from './components/backend/Invoices'
 import Parts from './components/backend/Parts'
 import Taxes from './components/backend/Taxes'
@@ -19,7 +18,6 @@ function App() {
           <Route index element={<Home />} />
           <Route path='invoice/create' element={<InvoiceCreate />} />
           <Route path='invoice/parts' element={<InvoiceParts />} />
-          <Route path='invoice/delete/:id' element={<InvoiceDelete />} />
           <Route path='invoices' element={<Invoices />} />
           <Route path='parts' element={<Parts />} />
           <Route path='taxes' element={<Taxes />} />

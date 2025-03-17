@@ -50,6 +50,7 @@ function DataTable({ id, columns, data }) {
   }, [data, id]);
 
   return (
+    
     <table id={id} className="dataTable">
       <thead>
         <tr>
