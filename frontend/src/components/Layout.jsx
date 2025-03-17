@@ -5,8 +5,8 @@ import SideBar from "./common/SideBar"
 function Layout(){
     return(
         <>
-            <NavBar />
-            <div className="flex container">
+            
+            <div className="flex">
                 <div className="h-screen inline-block"> 
                     <SideBar />
                 </div> 

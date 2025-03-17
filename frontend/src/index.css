@@ -21,7 +21,9 @@ form .input{
 }
 
 .home{
-    background: url('/src/assets/images/');
+    background: url('/src/assets/images/home.jpg');
+    background-size: cover;
+    background-position: center;
 }
 .container{
     background: url('/src/assets/images/bg.jpg');
