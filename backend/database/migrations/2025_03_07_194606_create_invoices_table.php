@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->string('subject');
-            $table->string('type');
+            $table->string('type')->nullable();
             $table->string('client');
             $table->unsignedBigInteger('contract')->nullable();
             $table->unsignedBigInteger('counter');
