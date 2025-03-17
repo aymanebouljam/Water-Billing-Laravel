@@ -67,13 +67,13 @@ class InvoiceController extends Controller
                 ]);
             }else{
                 return response()->json([
-                    'message' => 'Echec de création de la facture',
+                    'error' => 'Echec de création de la facture',
                 ]);
             }
         }catch(\Exception $e){
             \Log::error('Error while storing invoice '. $e->getMessage());
             return response()->json([
-                'message' => 'Erreur lors de création de la facture',
+                'error' => 'Erreur lors de création de la facture',
             ]);
 
         }
