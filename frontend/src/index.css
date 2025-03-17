@@ -48,7 +48,10 @@ table{
 table.dataTable{
     @apply   bg-white/5  backdrop-blur-lg shadow-lg rounded-2xl rounded-t-3xl
 }
+table.dataTable tr{
+    @apply hover:bg-secondaryBlue
+}
 
 .dt-search{
-    margin-right: 700px;
+    margin-right: 730px;
 }

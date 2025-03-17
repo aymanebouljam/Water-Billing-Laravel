@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { ArrowRightStartOnRectangleIcon, CogIcon, DocumentCurrencyDollarIcon, HomeIcon, PencilIcon, PencilSquareIcon, PresentationChartLineIcon } from "@heroicons/react/24/solid";
+import { ArrowRightStartOnRectangleIcon, CogIcon, DocumentCurrencyDollarIcon, HomeIcon, PencilIcon,  PresentationChartLineIcon } from "@heroicons/react/24/solid";
 
 
 function SideBar(){

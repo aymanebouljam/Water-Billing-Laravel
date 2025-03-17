@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 import { URL } from '../../common/URL'
+import { useNavigate} from "react-router-dom";
 
 
 function Create(){
+    const navigate = useNavigate()
     const [type, setType] = useState([]);
     const [contract, setContract] = useState(true);
     const [formData, setFormData] = useState({
@@ -115,6 +117,7 @@ function Create(){
                     throw new Error(res.data.error)
                 }else{
                     alert(res.data.message)
+                    navigate('/invoice/parts')
                 }
             
             }catch(err){
