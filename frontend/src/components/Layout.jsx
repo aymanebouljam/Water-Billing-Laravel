@@ -6,7 +6,7 @@ function Layout(){
     return(
         <>
             
-            <div className="flex">
+            <div className="flex container">
                 <div className="h-screen inline-block"> 
                     <SideBar />
                 </div> 

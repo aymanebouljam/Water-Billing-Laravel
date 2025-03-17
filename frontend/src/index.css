@@ -29,6 +29,12 @@ form .input{
     background: url('/src/assets/images/bg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
+}
+.parts{
+    background: url('/src/assets/images/parts.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 table, th, td{
     @apply border-2 border-collapse;
@@ -38,4 +44,11 @@ table{
 }
 .error{
     @apply text-red-600 font-medium px-3 py-1;
+}
+table.dataTable{
+    @apply   bg-white/5  backdrop-blur-lg shadow-lg rounded-2xl rounded-t-3xl
+}
+
+.dt-search{
+    margin-right: 700px;
 }
