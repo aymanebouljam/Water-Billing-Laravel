@@ -39,26 +39,29 @@ class InvoiceController extends Controller
         try{
             $request->validate([
                 'subject' => 'required',
-                'option' => 'required',
+                'type' => 'required',
                 'client' => "required|regex:/^[\p{L}\s'-]+$/u",
                 'contract' => 'numeric',
-                'counters' => 'required|numeric',
+                'counter' => 'required|numeric',
+                'total' => 'numeric',
             ],[
                 'subject.required' => 'Veuillez saisir l\'objet de la facture',
-                'option.required' => 'Veuillez saisir le type d\'opération',
+                'type.required' => 'Veuillez saisir le type d\'opération',
                 'client.required' => 'Veuillez saisir le nom du client',
                 'client.regex' => 'Le nom du client doit être alphabétique',
                 'contract.numeric' => 'Le numéro de contract doit être numérique',
-                'counters.required' => 'Veuillez indiquer le nombre des compteurs',
-                'counters.numeric' => 'Le nombre de compteurs doit être numérique',
+                'counter.required' => 'Veuillez indiquer le nombre des compteurs',
+                'counter.numeric' => 'Le nombre de compteurs doit être numérique',
+                'total.numeric' => 'Le total doit être numérique',
             ]);
     
             $invoice = Invoice::create([
                 'subject' => $request->subject,
-                'option' => $request->option,
+                'type' => $request->type,
                 'client' => $request->client,
-                'contract' => $request->contract,
-                'counters' => $request->counters
+                'contract' => $request->contract ?? null,
+                'counter' => $request->counter,
+                'total' => $request->total ?? null
             ]);
     
             if($invoice){
@@ -73,7 +76,7 @@ class InvoiceController extends Controller
         }catch(\Exception $e){
             \Log::error('Error while storing invoice '. $e->getMessage());
             return response()->json([
-                'error' => 'Erreur lors de création de la facture',
+                'error' => $e->getMessage(),
             ]);
 
         }
@@ -95,26 +98,26 @@ class InvoiceController extends Controller
         // try{
         //     $request->validate([
         //         'subject' => 'required',
-        //         'option' => 'required',
+        //         'type' => 'required',
         //         'client' => "required|regex:/^[\p{L}\s'-]+$/u",
         //         'contract' => 'numeric',
-        //         'counters' => 'required|numeric',
+        //         'counter' => 'required|numeric',
         //     ],[
         //         'subject.required' => 'Veuillez saisir l\'objet de la facture',
-        //         'option.required' => 'Veuillez saisir le type d\'opération',
+        //         'type.required' => 'Veuillez saisir le type d\'opération',
         //         'client.required' => 'Veuillez saisir le nom du client',
         //         'client.regex' => 'Le nom du client doit être alphabétique',
         //         'contract.numeric' => 'Le numéro de contract doit être numérique',
-        //         'counters.required' => 'Veuillez indiquer le nombre des compteurs',
-        //         'counters.numeric' => 'Le nombre de compteurs doit être numérique',
+        //         'counter.required' => 'Veuillez indiquer le nombre des compteurs',
+        //         'counter.numeric' => 'Le nombre de compteurs doit être numérique',
         //     ]);
     
         //     $result = $invoice->update([
         //         'subject' => $request->subject,
-        //         'option' => $request->option,
+        //         'type' => $request->type,
         //         'client' => $request->client,
         //         'contract' => $request->contract,
-        //         'counters' => $request->counters
+        //         'counter' => $request->counter
         //     ]);
     
         //     if($invoice){
