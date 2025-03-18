@@ -195,7 +195,7 @@ function Parts(){
 
 
    return (
-    <div className="flex flex-col w-full items-center">
+    <div className="flex flex-col w-full items-center container">
       <form onSubmit={handleSubmit} className="w-1/2 pt-5">
         <div className="flex items-center border-b border-primaryBlue py-2">
 

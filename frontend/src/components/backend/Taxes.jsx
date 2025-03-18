@@ -102,7 +102,7 @@ function Taxes(){
 
 
    return (
-    <div className="px-5 py-12 w-full parts">
+    <div className="px-5 py-12 w-full container">
       {loading ? (
         <div className="flex justify-center items-center h-48 mt-24">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900"></div>

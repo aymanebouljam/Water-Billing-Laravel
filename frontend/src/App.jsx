@@ -8,6 +8,7 @@ import Parts from './components/backend/Parts'
 import Taxes from './components/backend/Taxes'
 import Refresher from './components/common/Refresher'
 
+
 function App() {
  
 
@@ -15,6 +16,7 @@ function App() {
     <>
     <BrowserRouter> 
       <Routes>
+      
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='refresher/:pathname' element={<Refresher />} />

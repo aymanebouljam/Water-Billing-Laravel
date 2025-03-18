@@ -5,8 +5,8 @@ function Layout(){
     return(
         <>
             
-            <div className="flex container w-full">
-                <div className="h-screen inline-block"> 
+            <div className="flex w-full h-full">
+                <div className="inline-block"> 
                     <SideBar />
                 </div> 
                 <Outlet />
