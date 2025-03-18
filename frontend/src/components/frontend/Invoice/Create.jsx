@@ -15,6 +15,7 @@ function Create(){
         counter : '',
         contract : ''
     })
+    console.log(type)
  
     const [errors, setErrors] = useState({});
  
@@ -34,14 +35,14 @@ function Create(){
             return {...prevState, subject}
         }) 
         switch(subject){
-            case 'nouveau branchement' :
+            case 'Nouveau branchement' :
                     setType([
                         {value:'Branchement 2/3', label:'Branchement de 25'},
                         {value:'Branchement 1"1/2', label:'Branchement de 50'}
                     ])
                 setContract(false);
                 break;
-            case 'modification de branchement':
+            case 'Modification de branchement':
                  setType([
                     {value:'Modification 1/2 au 2/3', label:'Modification de 20 au 25'},
                     {value:'Modification 1/2 au 1"1/2', label:'Modification de 20 au 50'},
