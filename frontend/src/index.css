@@ -6,10 +6,10 @@
     user-select: none;
 }
 html, body{
-    @apply h-screen ;
+    @apply h-screen w-screen ;
 }
 #root{
-    @apply h-screen flex flex-col;
+    @apply w-full h-full;
 }
 .icon{
     @apply w-8 h-8;
@@ -28,17 +28,14 @@ form .input{
     background-size: cover;
     background-position: center;
 }
+
 .container{
     background: url('/src/assets/images/bg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
-.parts{
-    background: url('/src/assets/images/parts.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
+
 table, th, td{
     @apply border-2 border-collapse;
 }
