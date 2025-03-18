@@ -56,7 +56,7 @@ class InvoiceController extends Controller
     
             $invoice = Invoice::create([
                 'subject' => $request->subject,
-                'type' => $request->type,
+                'type' => $request->type ?? null,
                 'client' => $request->client,
                 'contract' => $request->contract ?? null,
                 'counter' => $request->counter,
