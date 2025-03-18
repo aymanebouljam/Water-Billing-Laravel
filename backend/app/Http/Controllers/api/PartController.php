@@ -57,13 +57,13 @@ class PartController extends Controller
                 ]);
             }else{
                 return response()->json([
-                    'message' => 'Echec de création de la pièce',
+                    'error' => 'Echec de création de la pièce',
                 ]);
             }
         }catch(\Exception $e){
             \Log::error('Error while storing part '. $e->getMessage());
             return response()->json([
-                'message' => 'Erreur lors de création de la pièce',
+                'error' => $e->getMessage(),
             ]);
 
         }
@@ -74,7 +74,19 @@ class PartController extends Controller
      */
     public function show(Part $part)
     {
-        //
+        try{
+            if(!$part){
+                return response()->json(['error' => 'Pièce non trouvé']);
+            }
+            return response()->json(['data' => [
+                'id' => $part->id,
+                'label' => $part->label,
+                'price' => $part->price
+            ]]);
+        }catch(\Exception){
+            \Log::error('Error while retreiving a Part'. $e->getMessage());
+            return response()->json(['error' =>  $e->getMessage()]);
+        }
     }
 
     /**
