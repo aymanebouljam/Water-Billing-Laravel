@@ -200,7 +200,7 @@ function Taxes(){
 
           <input className="appearance-none bg-transparent border-none w-full text-gray-800 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Désignation" aria-label="type" name="type" id="type" value={formData.type} onChange={handleChange}/>
 
-          <input className="appearance-none bg-transparent border-none w-1/2 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="number" step='any' min={0} placeholder="Prix" aria-label="rate" name="rate" id="rate" value={formData.rate} onChange={handleChange}/>
+          <input className="appearance-none bg-transparent border-none w-1/2 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="number" step='any' min={0} placeholder="Taux" aria-label="rate" name="rate" id="rate" value={formData.rate} onChange={handleChange}/>
 
           <button className="w-1/6 flex-shrink-0 bg-primaryBlue hover:bg-sky-700 hover:text-white border-primaryBlue hover:border-sky-700 text-sm border-4 text-dark py-1 px-2 rounded" type="submit">
             {isEdited ? 'Modifier' : 'Créer'}

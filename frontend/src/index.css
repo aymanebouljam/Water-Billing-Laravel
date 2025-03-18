@@ -22,6 +22,9 @@ html, body{
 form .input{
     @apply  border-2 p-3 rounded-xl my-3;
 }
+input[type='number']{
+    @apply appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none; 
+}
 
 .home{
     background: url('/src/assets/images/home.jpg');
@@ -45,7 +48,6 @@ table{
 .error{
     @apply text-red-600 font-medium px-3 py-1;
 }
-
 
 table.dataTable{
     @apply   bg-white/5  backdrop-blur-lg shadow-lg rounded-2xl rounded-t-3xl
