@@ -15,6 +15,7 @@ Route::get('/user', function (Request $request) {
 Route::controller(PartController::class)->group(function(){
     Route::get('/parts','index')->name('parts.index');
     Route::post('/parts','store')->name('parts.store');
+    Route::get('/parts/{part}','show')->name('parts.show');
     Route::put('/parts/{part}/update','update')->name('parts.update');
     Route::delete('/parts/{part}', 'destroy')->name('parts.destroy');
 });
