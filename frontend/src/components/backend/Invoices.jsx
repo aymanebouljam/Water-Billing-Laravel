@@ -71,6 +71,7 @@ function Invoices(){
               "color" :"white",
               "text-align": "center",
               "padding": "12px",
+              "width" : "200px"
             });
             $(".dataTables_wrapper .dataTables_paginate, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter").css({
               "color": "black"
