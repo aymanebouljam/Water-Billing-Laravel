@@ -1,13 +1,13 @@
 import {  useEffect, useState } from "react";
 import { URL } from '../common/URL'
 import axios from "axios";
-import { TrashIcon } from "@heroicons/react/24/solid";
+import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
 import $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-dt';
 import 'datatables.net-dt/css/dataTables.dataTables.css';
 function Invoices(){
-    const [id, setId] = useState(null)
+    const [deleteId, setDeleteId] = useState(null)
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState();
 
@@ -30,6 +30,7 @@ function Invoices(){
     useEffect(()=>{
         getInvoices()
     },[])
+    // Data Table
     useEffect(() => {
         if (data.length === 0) return;
         
@@ -82,9 +83,9 @@ function Invoices(){
      //Delete an invoice
      useEffect(()=>{
         const deleteInvoice = async () => {
-            if (!id) return
+            if (!deleteId) return
             try {
-                const res = await axios.delete(`${URL}invoices/${id}`)
+                const res = await axios.delete(`${URL}invoices/${deleteId}`)
                 if (res.data.error) {
                     throw new Error(res.data.error)
                 } else {
@@ -96,8 +97,8 @@ function Invoices(){
                 alert(err)
             }
         }; deleteInvoice()
-    },[id])
-
+    },[deleteId])
+ 
 
 
 
@@ -133,7 +134,7 @@ function Invoices(){
                 <td>
                     <button onClick={()=>{
                         if(confirm('Veuillez confimer la suppression')){
-                            setId(row.id)
+                            setDeleteId(row.id)
                         }
                     }}>
                         <TrashIcon className="w-4 h-4" />

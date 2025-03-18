@@ -1,12 +1,11 @@
 import { Outlet } from "react-router-dom"
-import NavBar from "./common/NavBar"
 import SideBar from "./common/SideBar"
 
 function Layout(){
     return(
         <>
             
-            <div className="flex container">
+            <div className="flex container w-full">
                 <div className="h-screen inline-block"> 
                     <SideBar />
                 </div> 

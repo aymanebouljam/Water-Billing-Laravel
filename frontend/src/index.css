@@ -1,7 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+*:hover{
+    cursor:pointer;
+    user-select: none;
+}
 html, body{
     @apply h-screen ;
 }
