@@ -4,8 +4,11 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bill;
+use App\Models\Invoice;
+use App\Models\Part;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 
 class BillController extends Controller
@@ -25,44 +28,48 @@ class BillController extends Controller
     {
         try{
             $request->validate([
-                'invoiceId' => 'required|exists:invoices,id',
-                'parts' => 'required|array',
-                'parts.*.partId' => 'required|exists:parts,id',
-                'parts.*.quantity' => 'required|numeric|min:1',
+                '*.invoiceId' => 'required|exists:invoices,id',
+                '*.partId' => 'required|exists:parts,id',
+                '*.quantity' => 'required|numeric|min:1',
             ],[
-                'invoiceId.required' => 'L\'ID de la facture est requis.',
-                'invoiceId.exists' => 'Cette facture n\'existe pas.',
-                'parts.required' => 'Les pièces sont requises.',
-                'parts.array' => 'Les pièces doivent être un tableau.',
-                'parts.*.partId.required' => 'L\'ID de la pièce est requis.',
-                'parts.*.partId.exists' => 'Cette pièce n\'existe pas.',
-                'parts.*.quantity.required' => 'La quantité est requise.',
-                'parts.*.quantity.numeric' => 'La quantité doit être un nombre.',
-                'parts.*.quantity.min' => 'La quantité doit être au moins 1.',
+                '*.invoiceId.required' => 'L\'ID de la facture est requis.',
+                '*.invoiceId.exists' => 'Cette facture n\'existe pas.',
+                '*.partId.required' => 'L\'ID de la pièce est requis.',
+                '*.partId.exists' => 'Cette pièce n\'existe pas.',
+                '*.quantity.required' => 'La quantité est requise.',
+                '*.quantity.numeric' => 'La quantité doit être un nombre.',
+                '*.quantity.min' => 'La quantité doit être au moins 1.',
             ]);
 
-            $invoiceId = $request->invoiceId;
-            $parts = $request->parts;
+            $bills = $request->all();
             $data = [];
-            foreach($parts as $part){
+        
+            foreach($bills as $bill){
                 array_push($data, [
-                    'invoiceId' => $invoiceId,
-                    'partId' => $part['partId'],
-                    'quantity' => $part['quantity'],
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    'invoiceId' => $bill['invoiceId'],
+                    'partId' => $bill['partId'],
+                    'quantity' => $bill['quantity'],
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
                 ]);
             }
-            log::info('Data array', $data);
+            log::info('Bills array', $data);
             Bill::insert($data);
-
+            $invoice = Invoice::find($data[0]['invoiceId']);
+            if(!$invoice){
+               return response()->json(['error' => 'Facture non trouvée'], 400);
+            }
+            $total = $invoice->calculateTotal;
+            $invoice->update([
+                'total' => $invoice->total,
+            ]);
             return response()->json([
-                'message' => 'Facture EG crée avec succés'
+                'message' => 'Facture crée avec succés: '.$total,
             ]);
 
         }catch(\Exception $e){
             log::error('Error while storing Bill '. $e->getMessage());
-            return response()->json(['message' => 'Erreur survenue lors d\'exécution de l\'opération demandée']);
+            return response()->json(['error' => $e->getMessage()]);
         }
     }
 

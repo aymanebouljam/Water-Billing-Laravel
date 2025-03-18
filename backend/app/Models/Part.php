@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Invoice;
 
 class Part extends Model
 {
@@ -10,6 +11,7 @@ class Part extends Model
 
     public function invoices()
     {
-        return $this->belongsToMany('bills', 'partId', 'invoiceId')->withPivot('quantity');
+        return $this->belongsToMany(Invoice::class, 'bills', 'invoiceId', 'partId')
+                    ->withPivot('quantity');
     }
 }
