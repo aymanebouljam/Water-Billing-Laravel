@@ -1,4 +1,4 @@
-import DataTable from "../common/DataTable";
+
 function Taxes(){
     const columns = ["ID", "Désignation", "Taux", 'Actions']
     const data = [
@@ -8,7 +8,7 @@ function Taxes(){
     ]
     return(
         <div className="px-4 py-16 w-full">
-            <DataTable title='Gérer les taxes' data={data} columns={columns}/>
+            
         </div>
     )
 }
