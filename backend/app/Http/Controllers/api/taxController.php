@@ -74,7 +74,19 @@ class taxController extends Controller
      */
     public function show(Tax $tax)
     {
-        //
+        try{
+            if(!$tax){
+                return response()->json(['error' => 'Taxe non trouvée']);
+            }
+            return response()->json(['data' => [
+                'id' => $tax->id,
+                'type' => $tax->type,
+                'rate' => $tax->rate
+            ]]);
+        }catch(\Exception){
+            \Log::error('Error while retreiving a Part'. $e->getMessage());
+            return response()->json(['error' =>  $e->getMessage()]);
+        }
     }
 
     /**

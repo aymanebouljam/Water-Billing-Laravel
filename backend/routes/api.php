@@ -23,6 +23,7 @@ Route::controller(PartController::class)->group(function(){
 Route::controller(TaxController::class)->group(function(){
     Route::get('/taxes', 'index')->name('taxes.index');
     Route::post('/taxes', 'store')->name('taxes.store');
+    Route::get('/taxes/{tax}','show')->name('taxes.show');
     Route::put('/taxes/{tax}/update', 'update')->name('taxes.update');
     Route::delete('/taxes/{tax}', 'destroy')->name('taxes.destroy');
 });
