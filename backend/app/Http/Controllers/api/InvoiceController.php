@@ -65,7 +65,7 @@ class InvoiceController extends Controller
     
             if($invoice){
                 return response()->json([
-                    'message' => 'Facture créee avec succés',
+                    'id' => $invoice->id,
                 ]);
             }else{
                 return response()->json([
