@@ -5,10 +5,14 @@ import $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-dt';
 import 'datatables.net-dt/css/dataTables.dataTables.css';
+import { CheckBadgeIcon } from "@heroicons/react/24/solid";
+import { useParams } from "react-router-dom";
 
 function Parts() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [quantity, setQuantity] = useState([])
+  const { invoice } = useParams()
 
   useEffect(() => {
     setLoading(true);
@@ -57,7 +61,7 @@ function Parts() {
         
         $("table.dataTable th").css({
           "border" : "none",
-          "background": "#191970",
+          "background": "#2b619b",
           "color" :"white",
           "text-align": "center",
           "padding": "12px",
@@ -68,34 +72,77 @@ function Parts() {
       },
     });
   }, [data]);
+  // handleChange 
+  const handleChange = (e) => {
+      const {id, value} = e.currentTarget;
+      if(value > 0){
+        setQuantity((prevState) => {
+          return [...prevState, {partId : id, quantity : value}]
+        })
+      }else{
+        setQuantity((prevState) => {
+          return  prevState.filter(el => (
+              el.id !== id
+          ))
+        })
+      }
+  }
+  // handleClick
+  const handleClick = async() =>{
+      if(quantity.length === 0){
+        alert('Veuillez désigner les quantités des pièces')
+        return;
+      }
+      
+      try{
+        const formData = quantity.map(el => ({invoiceId:invoice, ...el }))
+        const res = await axios.post(`${URL}bills`, formData)
+        if(res.data.error){
+          throw new Error(res.data.error)
+        }else{
+          alert('Facture crée avec succées')
+        }
+      }catch(err){
+          console.error(err)
+      }
+  }
 
   return (
-    <div className="px-5 py-12 container">
+    <div className="px-5 py-12 container relative">
       {loading ? (
         <div className="flex justify-center items-center h-48 mt-24">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900"></div>
         </div>
       ) : (
-        <table id="partsTable" className="dataTable w-1/2">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Désignation</th>
-              <th>Prix Unitaire</th>
-              <th>Quantité</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map(row => (
-              <tr key={row.id}>
-                <td>{row.id}</td>
-                <td>{row.label}</td>
-                <td>{row.price}</td>
-                <td><input type="number" step='any' defaultValue={0} className="p-2 rounded-xl text-center text-black" min={0} /></td>
+        <div>
+          <button type="button" className="validate bg-secondaryBlue absolute z-10 top-14 right-8  rounded-lg flex justify-center items-center gap-x-2 py-2 px-3 hover:scale-110"  onClick={handleClick}>
+            <CheckBadgeIcon className="w-6 h-6"/>
+            Valider
+          </button>
+          <table id="partsTable" className="dataTable w-1/2">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Désignation</th>
+                <th>Prix Unitaire</th>
+                <th>Quantité</th>
               </tr>
-            ))}
-          </tbody>
+            </thead>
+            <tbody>
+              {data.map(row => (
+                <tr key={row.id}>
+                  <td>{row.id}</td>
+                  <td>{row.label}</td>
+                  <td>{row.price}</td>
+                  <td><input type="number" step='any' defaultValue={0} id={row.id} className="p-2 rounded-xl text-center text-black  bg-transparent border-none leading-tight focus:outline-none" min={0} onChange={handleChange}/></td>
+                </tr>
+              ))}
+            </tbody>
         </table>
+        
+        
+        
+        </div>
       )}
     </div>
   );

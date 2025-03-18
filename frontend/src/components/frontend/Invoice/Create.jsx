@@ -125,10 +125,8 @@ function Create(){
                 if(res.data.error){
                     console.error(res.data.error)
                     throw new Error(res.data.error)
-                    
                 }else{
-                    alert(res.data.message)
-                    navigate('/invoice/parts')
+                    navigate(`/invoice/parts/${res.data.id}`)
                 }
             
             }catch(err){
