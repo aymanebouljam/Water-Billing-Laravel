@@ -75,7 +75,7 @@ function Parts(){
             
             $("table.dataTable th").css({
               "border" : "none",
-              "background": " #2b619b",
+              "background": "#2b619b",
               "color" :"white",
               "text-align": "center",
               "padding": "12px",
@@ -201,7 +201,7 @@ function Parts(){
 
           <input className="appearance-none bg-transparent border-none w-full text-gray-800 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Désignation" aria-label="label" name="label" id="label" value={formData.label} onChange={handleChange}/>
 
-          <input className="appearance-none bg-transparent border-none w-1/2 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="number" min={0} placeholder="Prix" aria-label="price" name="price" id="price" value={formData.price} onChange={handleChange}/>
+          <input className="appearance-none bg-transparent border-none w-1/2 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="number" step='any' min={0} placeholder="Prix" aria-label="price" name="price" id="price" value={formData.price} onChange={handleChange}/>
 
           <button className="w-1/6 flex-shrink-0 bg-primaryBlue hover:bg-sky-700 hover:text-white border-primaryBlue hover:border-sky-700 text-sm border-4 text-dark py-1 px-2 rounded" type="submit">
             {isEdited ? 'Modifier' : 'Créer'}
