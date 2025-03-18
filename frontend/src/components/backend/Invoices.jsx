@@ -68,7 +68,7 @@ function Invoices(){
             
             $("table.dataTable th").css({
               "border" : "none",
-              "background": "#191970",
+              "background": "#2b619b",
               "color" :"white",
               "text-align": "center",
               "padding": "12px",

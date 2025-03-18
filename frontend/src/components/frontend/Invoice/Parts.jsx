@@ -91,7 +91,7 @@ function Parts() {
                 <td>{row.id}</td>
                 <td>{row.label}</td>
                 <td>{row.price}</td>
-                <td><input type="number" defaultValue={0} className="p-2 rounded-xl text-center text-black" min={0} /></td>
+                <td><input type="number" step='any' defaultValue={0} className="p-2 rounded-xl text-center text-black" min={0} /></td>
               </tr>
             ))}
           </tbody>
