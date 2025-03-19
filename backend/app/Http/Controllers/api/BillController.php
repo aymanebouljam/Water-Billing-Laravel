@@ -54,7 +54,7 @@ class BillController extends Controller
                 ]);
             }
             log::info('Bills array', $data);
-            $billId = Bill::insertGetId($data[0]);
+            $bill = Bill::insert($data);
             if(!$bill){
                 return response()->json(['error' => 'Création échouée'], 400);
             }

@@ -96,7 +96,15 @@ function Parts() {
       }
       
       try{
-        const formData = quantity.map(el => ({invoiceId:invoice, ...el }))
+        const filteredObject = quantity.reduce((acc, curr)=>{
+              acc[curr.partId] = curr
+              return acc
+        },{})
+
+        const filteredArray = Object.values(filteredObject)
+
+        const formData = filteredArray.map(el => ({invoiceId:invoice, ...el }))
+
         const res = await axios.post(`${URL}bills`, formData)
         if(res.data.error){
           throw new Error(res.data.error)

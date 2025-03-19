@@ -15,7 +15,7 @@ function Create(){
         counter : '',
         contract : ''
     })
-    console.log(type)
+ 
  
     const [errors, setErrors] = useState({});
  
@@ -114,7 +114,6 @@ function Create(){
         }
         if(Object.keys(newErrors).length > 0){
             setErrors(newErrors)
-            console.log(newErrors.counter)
             return;
         }else{
             setErrors({})
@@ -123,7 +122,6 @@ function Create(){
             try{
                 const res = await axios.post(`${URL}invoices`,formData)
                 if(res.data.error){
-                    console.error(res.data.error)
                     throw new Error(res.data.error)
                 }else{
                     navigate(`/invoice/parts/${res.data.id}`)
