@@ -1,15 +1,17 @@
 import {  useEffect, useState } from "react";
 import { URL } from '../common/URL'
 import axios from "axios";
-import { TrashIcon } from "@heroicons/react/24/solid";
+import { PrinterIcon, TrashIcon } from "@heroicons/react/24/solid";
 import $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-dt';
 import 'datatables.net-dt/css/dataTables.dataTables.css';
+import { useNavigate } from "react-router-dom";
 function Invoices(){
     const [deleteId, setDeleteId] = useState(null)
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState();
+    const navigate = useNavigate()
 
     const token = String(localStorage.getItem('token'))
     if(token){
@@ -24,7 +26,6 @@ function Invoices(){
             if(res.data.error){
                 throw new Error(res.data.error)
             }else{
-                console.log(res.data)
                 setData(res.data.data)
                 setLoading(false)
             }
@@ -104,10 +105,6 @@ function Invoices(){
             }
         }; deleteInvoice()
     },[deleteId])
- 
-
-
-
 
    return (
     <div className="px-5 py-12 w-full container">
@@ -138,6 +135,11 @@ function Invoices(){
                 <td>{row.counter}</td>
                 <td>{row.total.toFixed(2) || 'N/A'}</td>
                 <td className="hover:scale-110">
+                    <button className="mr-4" onClick={()=>{
+                      navigate(`/export/${row.id}`)
+                    }}>
+                      <PrinterIcon className="w-4 h-4" />
+                    </button>
                     <button  onClick={()=>{
                         if(confirm('Veuillez confimer la suppression')){
                             setDeleteId(row.id)
