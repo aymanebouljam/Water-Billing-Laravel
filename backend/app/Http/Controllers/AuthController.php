@@ -15,8 +15,9 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        // Validate the incoming request data
-        $credentials = $request->validate([
+       try{
+         // Validate the incoming request data
+         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
@@ -32,12 +33,18 @@ class AuthController extends Controller
                 'token' => $token,
                 'user' => $user,
             ], 200);
+        }else{
+            \Log::error('Error while login the user: Invalid credentials');
+            return response()->json([
+                'error' => 'Informations incorrectes',
+            ]);
         }
-
-        // Return error if credentials are invalid
-        return response()->json([
-            'message' => 'Invalid credentials',
-        ], 401);
+       }catch(\Exception $e){
+            \Log::error('Error while login the user: ' . $e->getMessage());
+            return response()->json([
+                'error' => $e->getMessage(),
+            ], 401);
+       }
     }
 
     /**
@@ -52,7 +59,7 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
 
         return response()->json([
-            'message' => 'Logged out successfully',
+            'message' => 'Déconnexion réussie!',
         ], 200);
     }
 }
