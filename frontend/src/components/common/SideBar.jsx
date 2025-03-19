@@ -13,7 +13,7 @@ function SideBar(){
                     </li>
                     <li className="link">
                         <PencilIcon className="w-8 h-8" />
-                        <Link to='/invoice/create'>Nouveau</Link>
+                        <Link to='/invoice'>Nouveau</Link>
                     </li>
                     <li className="link">
                         <DocumentCurrencyDollarIcon className="icon" />

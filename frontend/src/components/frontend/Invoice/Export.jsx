@@ -2,17 +2,15 @@ import { useState } from 'react'
 import adobe from '../../../assets/images/adobe.png'
 import { useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
 import { URL } from '../../common/URL'
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import logo from '../../../assets/images/logo2.png'
 
-function Export(){
+
+function Export({id}){
     const [invoice, setInvoice] = useState({});
     const [taxes, setTaxes] = useState([]);
-    const { id } = useParams()
-    const navigate = useNavigate()
 
     
     const token = String(localStorage.getItem('token'))
@@ -50,7 +48,6 @@ function Export(){
             try{
                 const res = await axios.get(`${URL}invoices/${id}`)
                 if(res.data.error){
-                   
                     throw new Error(res.data.error)
                 }else{
                     setInvoice(res.data.invoice)
@@ -61,7 +58,7 @@ function Export(){
             }
         }
         fetchInvoice()
-    },[id, navigate])
+    },[id])
     // Numbers to letters
     function numberToFrenchWords(number) {
         const ones = ["", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf"];
@@ -200,70 +197,72 @@ function Export(){
     
         doc.save('invoice.pdf');
     };
-    
+
     return(
-      <>
-          <div className="export w-full flex flex-col gap-y-4  justify-center items-center">
-             <h1 className='text-2xl text-white font-medium  text-center  pb-5 w-1/3 animate-pulse'>Télécharger la Facture</h1>
-            <div className="flex items-center justify-center gap-x-16 w-1/2 h-1/2 bg-white/15  backdrop-blur-lg shadow-xl rounded-3xl  hover:animate-none">
-                <button onClick={printPDF}>
-                    <img src={adobe} alt='Adobe PDf' className='w-32 h-32 animate-bounce hover:animate-none'/>
-                </button>
+  
+        <>
+            <div className="export w-full flex flex-col gap-y-4  justify-center items-center">
+                <h1 className='text-2xl text-white font-medium  text-center  pb-5 w-1/3 animate-pulse'>Télécharger la Facture</h1>
+                <div className="flex items-center justify-center gap-x-16 w-1/2 h-1/2 bg-white/15  backdrop-blur-lg shadow-xl rounded-3xl  hover:animate-none">
+                    <button onClick={printPDF}>
+                        <img src={adobe} alt='Adobe PDf' className='w-32 h-32 animate-bounce hover:animate-none'/>
+                    </button>
+                </div>
             </div>
-        </div>
-        <table className='w-full hidden' id='invoiceTable'>
-            <thead>
-                <tr>
-                    <th>Désignation</th>
-                    <th>Prix Unitaire</th>
-                    <th>Quantité</th>
-                    <th>Total HT</th>
-                </tr>
-            </thead>
-            <tbody>
-                {(invoice?.parts?.length > 0) &&(
-                    invoice.parts.map(part => (
-                        <tr key={part.id}>
-                            <td>{part.label}</td>
-                            <td>{part.price}</td>
-                            <td>{part.pivot.quantity}</td>
-                            <td>{(part.price * part.pivot.quantity).toFixed(2)}</td>
-                        </tr>
-                    ))
-                )}
-                <tr>
-                    <td colSpan='3'>Total HT</td>
-                    <td>{calculateSubTotal()}</td>
-                </tr>
-                {
-                    (taxes?.length > 0) &&(
-                        taxes.map((tax,index) => (
-                            <tr key={tax.id}>
-                                <td colSpan='3'>{tax.type} {tax.rate * 100}%</td>
-                                <td>{calculateTaxAmount()[index]}</td>
+            <table className='w-full hidden' id='invoiceTable'>
+                <thead>
+                    <tr>
+                        <th>Désignation</th>
+                        <th>Prix Unitaire</th>
+                        <th>Quantité</th>
+                        <th>Total HT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {(invoice?.parts?.length > 0) &&(
+                        invoice.parts.map(part => (
+                            <tr key={part.id}>
+                                <td>{part.label}</td>
+                                <td>{part.price}</td>
+                                <td>{part.pivot.quantity}</td>
+                                <td>{(part.price * part.pivot.quantity).toFixed(2)}</td>
                             </tr>
                         ))
-                    )
-                } 
+                    )}
+                    <tr>
+                        <td colSpan='3'>Total HT</td>
+                        <td>{calculateSubTotal()}</td>
+                    </tr>
+                    {
+                        (taxes?.length > 0) &&(
+                            taxes.map((tax,index) => (
+                                <tr key={tax.id}>
+                                    <td colSpan='3'>{tax.type} {tax.rate * 100}%</td>
+                                    <td>{calculateTaxAmount()[index]}</td>
+                                </tr>
+                            ))
+                        )
+                    } 
+                    <tr>
+                        <td colSpan='3'>Total Général TTC</td>
+                        <td>{invoice?.total?.toFixed(2)}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
                 <tr>
-                    <td colSpan='3'>Total Général TTC</td>
-                    <td>{invoice?.total?.toFixed(2)}</td>
-                </tr>
-            </tbody>
-            <tfoot>
-            <tr>
-                <td colSpan='4'>
-                    Arrêtée la présente Facture à la somme de:
-                </td>
-               </tr>
-               <tr>
                     <td colSpan='4'>
-                        {convertTotalToWords(invoice?.total)?.at(0)?.toUpperCase() + convertTotalToWords(invoice?.total)?.slice(1)}
+                        Arrêtée la présente Facture à la somme de:
                     </td>
-               </tr>
-            </tfoot>
-        </table>
-     </>
-    )
+                </tr>
+                <tr>
+                        <td colSpan='4'>
+                            {convertTotalToWords(invoice?.total)?.at(0)?.toUpperCase() + convertTotalToWords(invoice?.total)?.slice(1)}
+                        </td>
+                </tr>
+                </tfoot>
+            </table>
+                        
+        </>
+    ) 
 }
 export default Export

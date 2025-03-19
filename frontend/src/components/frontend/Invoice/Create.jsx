@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import { URL } from '../../common/URL'
-import { useNavigate} from "react-router-dom";
+import Parts from './Parts'
+
 
 
 function Create(){
-    const navigate = useNavigate()
+
     const [type, setType] = useState([]);
     const [contract, setContract] = useState(true);
     const [formData, setFormData] = useState({
@@ -15,8 +16,7 @@ function Create(){
         counter : '',
         contract : ''
     })
- 
- 
+    const [invoiceID, setInvoiceID] = useState(null)
     const [errors, setErrors] = useState({});
 
     const token = String(localStorage.getItem('token'))
@@ -129,7 +129,7 @@ function Create(){
                 if(res.data.error){
                     throw new Error(res.data.error)
                 }else{
-                    navigate(`/invoice/parts/${res.data.id}`)
+                    setInvoiceID(res.data.id)
                 }
             
             }catch(err){
@@ -138,6 +138,7 @@ function Create(){
         }
         
     }
+    if(invoiceID === null){
     return(
         <div className="container">  
            <form onSubmit={handleSubmit} className="h-full flex flex-col bg-white/5  backdrop-blur-lg shadow-lg w-1/2 p-6 animate-pulse hover:animate-none">
@@ -189,5 +190,9 @@ function Create(){
            </form>
        </div>
     )
-}   
+    }
+    else if(invoiceID){
+       return <Parts invoice={invoiceID} />
+    } 
+}
 export default Create
