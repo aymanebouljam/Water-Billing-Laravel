@@ -8,6 +8,9 @@ import Invoices from './components/backend/Invoices'
 import Parts from './components/backend/Parts'
 import Taxes from './components/backend/Taxes'
 import Refresher from './components/common/Refresher'
+import Login from './components/backend/Login'
+import Logout from './components/backend/Logout'
+import Auth from './components/auth/Auth'
 
 
 function App() {
@@ -17,8 +20,11 @@ function App() {
     <>
     <BrowserRouter> 
       <Routes>
-      
-        <Route path='/' element={<Layout />}>
+
+        <Route path='/login' element={<Login />}/>
+        <Route path='/logout' element={<Auth><Logout /></Auth>}/>
+
+        <Route path='/' element={<Auth><Layout/></Auth>}>
           <Route index element={<Home />} />
           <Route path='refresher/:pathname' element={<Refresher />} />
           <Route path='invoice/create' element={<InvoiceCreate />} />
@@ -27,7 +33,10 @@ function App() {
           <Route path='invoices' element={<Invoices />} />
           <Route path='parts' element={<Parts />} />
           <Route path='taxes' element={<Taxes />} />
+          <Route path='*' element={<Home/>}/>
         </Route>
+
+      
       </Routes>
     </BrowserRouter>
       

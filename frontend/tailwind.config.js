@@ -9,7 +9,8 @@ export default {
       colors : {
           primaryBlue : "#58b7e7",
           secondaryBlue : "#76d0eb",
-          darkBlue : "#2b619b"
+          darkBlue : "#2b619b",
+          greenBlue : "#08bccc",
       }
     },
   },
