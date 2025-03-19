@@ -130,9 +130,9 @@ function Invoices(){
                 <td>{row.type || 'Déplacement de la niche'}</td>
                 <td>{row.contract || 'N/A'}</td>
                 <td>{row.counter}</td>
-                <td>{row.total || 'N/A'}</td>
-                <td>
-                    <button onClick={()=>{
+                <td>{row.total.toFixed(2) || 'N/A'}</td>
+                <td className="hover:scale-110">
+                    <button  onClick={()=>{
                         if(confirm('Veuillez confimer la suppression')){
                             setDeleteId(row.id)
                         }
