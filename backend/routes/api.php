@@ -6,10 +6,12 @@ use App\Http\Controllers\Api\PartController;
 use App\Http\Controllers\Api\TaxController;
 use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\BillController;
+use App\Http\Controllers\AuthController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+
+
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::controller(PartController::class)->group(function(){
