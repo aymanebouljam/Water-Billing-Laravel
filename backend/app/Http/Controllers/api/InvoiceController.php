@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\Tax;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 
 class InvoiceController extends Controller
 {
@@ -25,7 +27,7 @@ class InvoiceController extends Controller
                 'data' => $invoices,
             ]);
         }catch(\Exception $e){
-            \Log::error('Error while fetching Invoices '. $e->getMessage());
+            Log::error('Error while fetching Invoices '. $e->getMessage());
             return response()->json([
                 'error' => $e->getMessage(),
             ]);
@@ -74,7 +76,7 @@ class InvoiceController extends Controller
                 ]);
             }
         }catch(\Exception $e){
-            \Log::error('Error while storing invoice '. $e->getMessage());
+            Log::error('Error while storing invoice '. $e->getMessage());
             return response()->json([
                 'error' => $e->getMessage(),
             ]);
@@ -93,7 +95,7 @@ class InvoiceController extends Controller
                 'taxes' => Tax::all()
             ]);
         }catch(\Exception $e){
-            \Log::error('Error while getting a single invoice '. $e->getMessage());
+            Log::error('Error while getting a single invoice '. $e->getMessage());
             return response()->json([
                 'error' => $e->getMessage(),
             ]);
@@ -104,48 +106,36 @@ class InvoiceController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Invoice $invoice)
-    {
-        // try{
-        //     $request->validate([
-        //         'subject' => 'required',
-        //         'type' => 'required',
-        //         'client' => "required|regex:/^[\p{L}\s'-]+$/u",
-        //         'contract' => 'numeric',
-        //         'counter' => 'required|numeric',
-        //     ],[
-        //         'subject.required' => 'Veuillez saisir l\'objet de la facture',
-        //         'type.required' => 'Veuillez saisir le type d\'opération',
-        //         'client.required' => 'Veuillez saisir le nom du client',
-        //         'client.regex' => 'Le nom du client doit être alphabétique',
-        //         'contract.numeric' => 'Le numéro de contract doit être numérique',
-        //         'counter.required' => 'Veuillez indiquer le nombre des compteurs',
-        //         'counter.numeric' => 'Le nombre de compteurs doit être numérique',
-        //     ]);
+    { 
+        try{
+           
+            $request->validate([
+                'reference' => 'regex:/^[a-zA-Z0-9]+$/'
+            ],[
+                'reference.regex' => 'La réference ne doit contenir que des chiffres ou des lettres'
+            ]);
     
-        //     $result = $invoice->update([
-        //         'subject' => $request->subject,
-        //         'type' => $request->type,
-        //         'client' => $request->client,
-        //         'contract' => $request->contract,
-        //         'counter' => $request->counter
-        //     ]);
-    
-        //     if($invoice){
-        //         return response()->json([
-        //             'message' => 'Facture modifiée avec succés',
-        //         ]);
-        //     }else{
-        //         return response()->json([
-        //             'message' => 'Echec de modification de la facture',
-        //         ]);
-        //     }
-        // }catch(\Exception $e){
-        //     \Log::error('Error while updating invoice '. $e->getMessage());
-        //     return response()->json([
-        //         'message' => 'Erreur lors de modification de la facture',
-        //     ]);
 
-        // }
+            $result = $invoice->update([
+                'reference' => $request->reference,
+            ]);
+    
+            if($invoice){
+                return response()->json([
+                    'message' => 'Facture modifiée avec succés',
+                ]);
+            }else{
+                return response()->json([
+                    'message' => 'Echec de modification de la facture',
+                ]);
+            }
+        }catch(\Exception $e){
+            \Log::error('Error while updating invoice '. $e->getMessage());
+            return response()->json([
+                'message' => $e->getMessage(),
+            ]);
+
+        }
     }
 
     /**
