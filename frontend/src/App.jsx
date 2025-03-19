@@ -9,6 +9,7 @@ import Refresher from './components/common/Refresher'
 import Login from './components/backend/Login'
 import Logout from './components/backend/Logout'
 import Auth from './components/auth/Auth'
+import ReExport from './components/frontend/Invoice/ReExport'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path='invoices' element={<Invoices />} />
           <Route path='parts' element={<Parts />} />
           <Route path='taxes' element={<Taxes />} />
+          <Route path='export/:id' element={<ReExport />} />
           <Route path='*' element={<Home/>}/>
         </Route>
 
