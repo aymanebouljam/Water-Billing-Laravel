@@ -6,13 +6,14 @@ import 'datatables.net';
 import 'datatables.net-dt';
 import 'datatables.net-dt/css/dataTables.dataTables.css';
 import { CheckBadgeIcon } from "@heroicons/react/24/solid";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Parts() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState([])
   const { invoice } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     setLoading(true);
@@ -100,7 +101,8 @@ function Parts() {
         if(res.data.error){
           throw new Error(res.data.error)
         }else{
-          alert('Facture crée avec succées')
+            const id = res.data.id
+            navigate(`/invoice/export/${id}`)
         }
       }catch(err){
           console.error(err)

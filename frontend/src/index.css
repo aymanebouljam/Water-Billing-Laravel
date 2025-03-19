@@ -28,12 +28,18 @@ input[type='number']{
 
 .home{
     background: url('/src/assets/images/home.jpg');
-    background-size: cover;
-    background-position: center;
 }
 
 .container{
-    background: url('/src/assets/images/bg.jpg');
+    background: url('/src/assets/images/bg.jpg'); 
+}
+
+.export{
+    background: url('/src/assets/images/export.jpg');
+}
+.home,
+.container,
+.export{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
