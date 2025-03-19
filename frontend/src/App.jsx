@@ -23,7 +23,7 @@ function App() {
           <Route path='refresher/:pathname' element={<Refresher />} />
           <Route path='invoice/create' element={<InvoiceCreate />} />
           <Route path='invoice/parts/:invoice' element={<InvoiceParts />} />
-          <Route path='invoice/export/:invoice' element={<InvoiceExport />} />
+          <Route path='invoice/export/:id' element={<InvoiceExport />} />
           <Route path='invoices' element={<Invoices />} />
           <Route path='parts' element={<Parts />} />
           <Route path='taxes' element={<Taxes />} />
