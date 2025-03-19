@@ -29,7 +29,7 @@ function SideBar(){
                     </li>
                     <li className="flex items-center bg-secondaryBlue justify-center gap-x-2  rounded-lg p-4 mt-auto  hover:bg-primaryBlue hover:text-white">
                         <ArrowRightStartOnRectangleIcon className="min-w-6 min-h-6" />
-                        <Link to='/'>Déconnexion</Link>
+                        <Link to='/logout'>Déconnexion</Link>
                     </li>
                 </ul>
             </div>
