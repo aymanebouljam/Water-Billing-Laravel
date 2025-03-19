@@ -138,7 +138,7 @@ function Export(){
         const logoUrl = logo;
         const logoWidth = 34;
         const logoHeight = 25;
-        const logoX = titleX - (logoWidth / 2);
+        const logoX = titleX - (logoWidth / 2) + 2;
         const logoY = 5;
     
         doc.addImage(logoUrl, 'PNG', logoX, logoY, logoWidth, logoHeight);
@@ -157,9 +157,9 @@ function Export(){
         doc.setFontSize(11);
         doc.setFont('helvetica', 'normal');
     
-        doc.text(`Date: ${formattedDate}`, rightAlignX, secondSectionY, { align: 'right' });
-        doc.text(`Facture EG N°: .......`, rightAlignX, secondSectionY + 5, { align: 'right' });
-        doc.text(`Nom du Client: ${invoice.client}`, 14, secondSectionY + 10);
+        doc.text(`Bouizakarne, le: ${formattedDate}`, rightAlignX, secondSectionY, { align: 'right' });
+        doc.text(`Facture N°:`, rightAlignX, secondSectionY + 5, { align: 'right' });
+        doc.text(`Nom du Client: ${invoice.client.toUpperCase()}`, 14, secondSectionY + 10);
         doc.text(`Contrat: ${invoice.contract || ''}`, 14, secondSectionY + 15);
     
         const table = document.querySelector('#invoiceTable');
