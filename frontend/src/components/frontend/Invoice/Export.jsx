@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import adobe from '../../../assets/images/adobe.png'
-import excel from '../../../assets/images/excel.png'
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -111,7 +110,7 @@ function Export(){
         // Handle decimal
     function convertTotalToWords(total) {
         if(!total){
-            return;
+            return '';
         }
         const [integerPart, decimalPart] = total.toFixed(2).split("."); 
 
@@ -121,7 +120,7 @@ function Export(){
         let decimalWords = "";
         if (decimalValue > 0) {
             decimalWords = " et " + numberToFrenchWords(decimalValue) + 
-                            (decimalValue === 1 ? " Centime" : " Centimes");
+            (decimalValue === 1 ? " Centime" : " Centimes");
         }
 
         return integerWords + decimalWords;
@@ -137,7 +136,7 @@ function Export(){
         const titleX = pageWidth / 2;
         const rightAlignX = pageWidth - 14;
         const logoUrl = logo;
-        const logoWidth = 33;
+        const logoWidth = 34;
         const logoHeight = 25;
         const logoX = titleX - (logoWidth / 2);
         const logoY = 5;
@@ -147,7 +146,7 @@ function Export(){
         doc.setFontSize(10);
         doc.setFont('helvetica', 'bold');
         doc.text("ROYAUME DU MAROC", titleX, 40, { align: 'center' });
-        doc.text("OFFICE NATIONAL DE L'ELECTRICITE EST DE L'EAU POTABLE", titleX, 47, { align: 'center' });
+        doc.text("OFFICE NATIONAL DE L'ELECTRICITE ET DE L'EAU POTABLE", titleX, 47, { align: 'center' });
         doc.text('BRANCHE EAU', titleX, 52, { align: 'center' });
         doc.text('DIRECTION RÉGIONALE: GUELMIM', titleX, 59, { align: 'center' });
         doc.text('CENTRE: BOUIZAKARNE', titleX, 66, { align: 'center' });
@@ -199,13 +198,12 @@ function Export(){
 
     return(
      <>
-        <div className="export w-full flex flex-col gap-y-4 justify-center items-center">
-            <h1 className='text-2xl text-white font-medium border-b-2 p-2 border-primaryBlue animate-pulse'>Télécharger la Facture</h1>
+        <div className="export w-full flex flex-col gap-y-4  justify-center items-center">
+             <h1 className='text-2xl text-white font-medium  text-center  pb-5 w-1/3 animate-pulse'>Télécharger la Facture</h1>
             <div className="flex items-center justify-center gap-x-16 w-1/2 h-1/2 bg-white/15  backdrop-blur-lg shadow-xl rounded-3xl  hover:animate-none">
                 <button onClick={printPDF}>
-                    <img src={adobe} alt='Feuille Excel' className='w-20 h-20 animate-bounce hover:animate-none'/>
+                    <img src={adobe} alt='Adobe PDf' className='w-32 h-32 animate-bounce hover:animate-none'/>
                 </button>
-                <img src={excel} alt='Adobe PDf' className='w-20 h-20 animate-bounce hover:animate-none'/>
             </div>
         </div>
         <table className='w-full hidden' id='invoiceTable'>
@@ -255,7 +253,7 @@ function Export(){
                </tr>
                <tr>
                     <td colSpan='4'>
-                        {convertTotalToWords(invoice?.total)?.at(0).toUpperCase() + convertTotalToWords(invoice?.total)?.slice(1)}
+                        {convertTotalToWords(invoice?.total)?.at(0)?.toUpperCase() + convertTotalToWords(invoice?.total)?.slice(1)}
                     </td>
                </tr>
             </tfoot>
