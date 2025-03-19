@@ -51,7 +51,7 @@ function Login(){
                         throw new Error(res.data.error)
                     }else{
                         if(res.data.token){
-                            localStorage.setItem('token', JSON.stringify(res.data.token))
+                            localStorage.setItem('token', res.data.token)
                             const token = localStorage.getItem('token')
                             if(token){
                                  navigate('/')

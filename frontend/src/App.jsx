@@ -23,6 +23,7 @@ function App() {
 
         <Route path='/login' element={<Login />}/>
         <Route path='/logout' element={<Auth><Logout /></Auth>}/>
+  
 
         <Route path='/' element={<Auth><Layout/></Auth>}>
           <Route index element={<Home />} />
