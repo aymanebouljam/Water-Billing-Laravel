@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
+use App\Models\Tax;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -86,7 +87,17 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        //
+        try{
+            return response()->json([
+                'invoice' => $invoice,
+                'taxes' => Tax::all()
+            ]);
+        }catch(\Exception $e){
+            \Log::error('Error while getting a single invoice '. $e->getMessage());
+            return response()->json([
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 
     /**

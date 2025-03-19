@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Part;
+use App\Models\Tax;
 
 class Invoice extends Model
 {
@@ -16,10 +17,15 @@ class Invoice extends Model
     }
 
     public function  getTotalAttribute(){
-        $total = 0;
-
+        $subtotal = 0;
+      
         foreach($this->parts as $part){
-            $total += $part->price * $part->pivot->quantity;
+            $subtotal += $part->price * $part->pivot->quantity;
+        }
+        $taxes = Tax::all();
+        $total = $subtotal;
+        foreach($taxes as $tax){
+            $total += ($total * $tax->rate) ;
         }
 
         return $total;

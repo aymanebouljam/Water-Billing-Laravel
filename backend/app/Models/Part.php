@@ -8,6 +8,9 @@ use App\Models\Invoice;
 class Part extends Model
 {
     protected $guarded = ['id'];
+    protected $casts = [
+        'price' => 'float',
+    ];
 
     public function invoices()
     {
