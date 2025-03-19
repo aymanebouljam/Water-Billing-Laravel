@@ -2,7 +2,7 @@ import { useState } from 'react'
 import adobe from '../../../assets/images/adobe.png'
 import { useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { URL } from '../../common/URL'
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
@@ -12,7 +12,14 @@ function Export(){
     const [invoice, setInvoice] = useState({});
     const [taxes, setTaxes] = useState([]);
     const { id } = useParams()
+    const navigate = useNavigate()
 
+    
+    const token = String(localStorage.getItem('token'))
+    if(token){
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    }
+ 
     // Calculating subTotal
     const calculateSubTotal = () => {
         if(invoice.parts && invoice.parts.length > 0){
@@ -43,6 +50,7 @@ function Export(){
             try{
                 const res = await axios.get(`${URL}invoices/${id}`)
                 if(res.data.error){
+                   
                     throw new Error(res.data.error)
                 }else{
                     setInvoice(res.data.invoice)
@@ -53,7 +61,7 @@ function Export(){
             }
         }
         fetchInvoice()
-    },[id])
+    },[id, navigate])
     // Numbers to letters
     function numberToFrenchWords(number) {
         const ones = ["", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf"];
@@ -159,7 +167,7 @@ function Export(){
     
         doc.text(`Bouizakarne, le: ${formattedDate}`, rightAlignX, secondSectionY, { align: 'right' });
         doc.text(`Facture N°:`, rightAlignX, secondSectionY + 5, { align: 'right' });
-        doc.text(`Nom du Client: ${invoice.client.toUpperCase()}`, 14, secondSectionY + 10);
+        doc.text(`Nom du Client: ${invoice?.client?.toUpperCase()}`, 14, secondSectionY + 10);
         doc.text(`Contrat: ${invoice.contract || ''}`, 14, secondSectionY + 15);
     
         const table = document.querySelector('#invoiceTable');
@@ -193,12 +201,9 @@ function Export(){
         doc.save('invoice.pdf');
     };
     
-    
-
-
     return(
-     <>
-        <div className="export w-full flex flex-col gap-y-4  justify-center items-center">
+      <>
+          <div className="export w-full flex flex-col gap-y-4  justify-center items-center">
              <h1 className='text-2xl text-white font-medium  text-center  pb-5 w-1/3 animate-pulse'>Télécharger la Facture</h1>
             <div className="flex items-center justify-center gap-x-16 w-1/2 h-1/2 bg-white/15  backdrop-blur-lg shadow-xl rounded-3xl  hover:animate-none">
                 <button onClick={printPDF}>

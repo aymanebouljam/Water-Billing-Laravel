@@ -18,6 +18,11 @@ function Create(){
  
  
     const [errors, setErrors] = useState({});
+
+    const token = String(localStorage.getItem('token'))
+    if(token){
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    }
  
 
     //Handle input change

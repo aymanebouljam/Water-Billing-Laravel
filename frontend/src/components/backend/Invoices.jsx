@@ -1,7 +1,7 @@
 import {  useEffect, useState } from "react";
 import { URL } from '../common/URL'
 import axios from "axios";
-import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { TrashIcon } from "@heroicons/react/24/solid";
 import $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-dt';
@@ -11,6 +11,11 @@ function Invoices(){
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState();
 
+    const token = String(localStorage.getItem('token'))
+    if(token){
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    }
+
     // fetchInvoices
     const getInvoices = async () => {
         setLoading(true)
@@ -19,6 +24,7 @@ function Invoices(){
             if(res.data.error){
                 throw new Error(res.data.error)
             }else{
+                console.log(res.data)
                 setData(res.data.data)
                 setLoading(false)
             }
