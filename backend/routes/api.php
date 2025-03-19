@@ -31,6 +31,7 @@ Route::controller(TaxController::class)->group(function(){
 Route::controller(InvoiceController::class)->group(function(){
     Route::get('/invoices', 'index')->name('invoices.index');
     Route::post('/invoices', 'store')->name('invoices.store');
+    Route::get('/invoices/{invoice}', 'show')->name('invoices.show');
     // Route::put('/invoices/{invoice}/update', 'update')->name('invoices.update');
     Route::delete('/invoices/{invoice}', 'destroy')->name('invoices.destroy');
 });

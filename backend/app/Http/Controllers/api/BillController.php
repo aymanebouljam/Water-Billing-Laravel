@@ -54,17 +54,23 @@ class BillController extends Controller
                 ]);
             }
             log::info('Bills array', $data);
-            Bill::insert($data);
+            $billId = Bill::insertGetId($data[0]);
+            if(!$bill){
+                return response()->json(['error' => 'Création échouée'], 400);
+            }
             $invoice = Invoice::find($data[0]['invoiceId']);
             if(!$invoice){
                return response()->json(['error' => 'Facture non trouvée'], 400);
             }
-            $total = $invoice->calculateTotal;
+            $total = $invoice->total;
+
             $invoice->update([
-                'total' => $invoice->total,
+                'total' => $total,
             ]);
+
             return response()->json([
-                'message' => 'Facture crée avec succés: '.$total,
+                'id' => $invoice->id,
+                'total' => $total
             ]);
 
         }catch(\Exception $e){
