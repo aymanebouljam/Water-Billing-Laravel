@@ -61,6 +61,7 @@ function Login(){
                         }
                     }
                 }catch(err){
+                    alert('Email ou Mot de passe incorrect')
                     console.error(err)
                 }    
         }
@@ -68,8 +69,8 @@ function Login(){
     return(
         <>
             <div className="flex w-full h-full items-center justify-center login">
-                <form onSubmit={handleSubmit} className="flex flex-col w-1/3 bg-blue-950/35  backdrop-blur-lg shadow-2xl  rounded-2xl   px-6 py-8 border border-white">
-                    <h1 className="text-3xl font-medium text-white text-center px-3 py-4">Authentification</h1>
+                <form onSubmit={handleSubmit} className="flex flex-col w-1/3 bg-white/25  backdrop-blur-lg shadow-2xl  rounded-2xl   px-6 py-8 border border-white">
+                    <h1 className="text-3xl font-medium text-gray-700 text-center px-3 py-4">Authentification</h1>
                     <input type="text" id="email" name="email" className="input" placeholder="Votre Email" onChange={handleChange} value={FormData.email}/>
                     <div className="error">
                             {errors?.email}
@@ -82,7 +83,7 @@ function Login(){
                     
                     <div className="flex justify-center mt-5 py-3 gap-x-10">
                         <button type="submit" className="bg-greenBlue font-medium rounded-lg p-4 border border-white hover:bg-primaryBlue hover:border-black">Connexion</button>
-                        <button type="rest" className="p-3 font-medium text-dark rounded-lg hover:text-white hover:border  hover:border-white">Annuler</button>
+                        <button type="reset" className="p-3 font-medium text-dark rounded-lg hover:text-white hover:border  hover:border-white">Annuler</button>
                     </div>
                 </form>
             </div>

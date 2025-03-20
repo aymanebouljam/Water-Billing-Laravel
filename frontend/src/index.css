@@ -22,7 +22,7 @@ html, body{
     @apply flex justify-around items-center w-full h-full;
 }
 form .input{
-    @apply  border-2 p-3 rounded-xl my-3;
+    @apply  border-2 p-3 rounded-2xl my-3;
 }
 
 input:focus, textarea:focus, select:focus {
