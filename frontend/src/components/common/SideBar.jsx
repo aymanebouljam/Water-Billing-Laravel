@@ -7,30 +7,48 @@ function SideBar(){
         <>
             <div className="sideBar h-screen bg-gray-200 text-black font-600 text-lg ">
                 <ul className=" h-full flex flex-col items-center md:gap-y-4 2xl:xl:gap-y-8  p-6">
-                    <li className="link">
-                        <HomeIcon className="icon"></HomeIcon>
-                        <Link to='/'>Acceuil</Link>
-                    </li>
-                    <li className="link">
-                        <PencilIcon className="w-8 h-8" />
-                        <Link to='/invoice'>Nouveau</Link>
-                    </li>
-                    <li className="link">
-                        <DocumentCurrencyDollarIcon className="icon" />
-                        <Link to='/invoices'>Facture</Link>
-                    </li>
-                    <li className="link">
-                        <CogIcon className="icon" />
-                        <Link to='/parts'>Pièces</Link>
-                    </li>
-                    <li className="link">
-                        <PresentationChartLineIcon className="icon" />
-                        <Link to='/taxes'>Taxes</Link>
-                    </li>
-                    <li className="flex items-center bg-secondaryBlue justify-center gap-x-2  rounded-lg p-4 mt-auto  hover:bg-primaryBlue hover:text-white">
-                        <ArrowRightStartOnRectangleIcon className="min-w-6 min-h-6" />
-                        <Link to='/logout'>Déconnexion</Link>
-                    </li>
+                    <Link className="link" to="/">
+                        <li className="list">
+                            <HomeIcon className="icon" />
+                            Acceuil
+                        </li>
+                    </Link>
+
+                    <Link className="link" to="/invoice">
+                        <li className="list">
+                            <PencilIcon className="w-8 h-8" />
+                            Nouveau
+                        </li>
+                    </Link>
+
+                    <Link className="link" to="/invoices">
+                        <li className="list">
+                            <DocumentCurrencyDollarIcon className="icon" />
+                            Facture
+                        </li>
+                    </Link>
+
+                    <Link className="link" to="/parts">
+                        <li className="list">
+                            <CogIcon className="icon" />
+                            Pièces
+                        </li>
+                    </Link>
+
+                    <Link className="link" to="/taxes">
+                        <li className="list">
+                            <PresentationChartLineIcon className="icon" />
+                            Taxes
+                        </li>
+                    </Link>
+
+                    <Link to="/logout" className="flex items-center bg-secondaryBlue justify-center gap-x-2 rounded-lg p-4 mt-auto hover:bg-primaryBlue hover:text-white">
+                        <li className="flex items-center gap-x-2">
+                            <ArrowRightStartOnRectangleIcon className="min-w-6 min-h-6" />
+                            Déconnexion
+                        </li>
+                    </Link>
+
                 </ul>
             </div>
         </>
