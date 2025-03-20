@@ -5,7 +5,7 @@ import { ArrowRightStartOnRectangleIcon, CogIcon, DocumentCurrencyDollarIcon, Ho
 function SideBar(){
     return (
         <>
-            <div className="sideBar h-screen bg-gray-200 text-black font-600 text-lg ">
+            <div className="sideBar h-screen bg-gray-200 text-black font-600 text-lg border-r-2 border-secondaryBlue ">
                 <ul className=" h-full flex flex-col items-center md:gap-y-4 2xl:xl:gap-y-8  p-6">
                     <Link className="link" to="/">
                         <li className="list">
