@@ -232,11 +232,11 @@ function Taxes(){
                 <td>{row.id}</td>
                 <td>{row.type}</td>
                 <td>{row.rate}</td>
-                <td className="flex w-full h-full">
-                  <button type="button" className="w-1/2  p-2 flex items-center justify-center hover:scale-125" data-id={row.id} onClick={fetchSingleTax}>
+                <td className="flex justify-center w-full h-full">
+                  <button type="button" className="w-1/4  p-2 flex items-center justify-center hover:scale-125" data-id={row.id} onClick={fetchSingleTax}>
                     <PencilSquareIcon className="w-4 h-4" />
                   </button>
-                  <button type="button" className="grow  p-2 flex items-center justify-center hover:scale-125" data-id={row.id} onClick={handleDelete}>
+                  <button type="button" className="w-1/4  p-2 flex items-center justify-center hover:scale-125" data-id={row.id} onClick={handleDelete}>
                     <TrashIcon className="w-4 h-4" />
                   </button>
                 </td>
