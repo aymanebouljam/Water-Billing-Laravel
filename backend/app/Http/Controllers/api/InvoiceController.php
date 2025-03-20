@@ -111,7 +111,7 @@ class InvoiceController extends Controller
            
             $request->validate([
                 'reference' => 'regex:/^[a-zA-Z0-9]+$/',
-                'contract' => 'numeric'
+                'contract' => 'nullable|numeric'
             ],[
                 'reference.regex' => 'La réference ne doit contenir que des chiffres ou des lettres',
                 'contract.numeric' => 'Le N° de police doit être numérique',
@@ -120,7 +120,7 @@ class InvoiceController extends Controller
 
             $result = $invoice->update([
                 'reference' => $request->reference,
-                'contract' => $request->contract
+                'contract' => $request->contract ?? null,
             ]);
     
             if($invoice){
