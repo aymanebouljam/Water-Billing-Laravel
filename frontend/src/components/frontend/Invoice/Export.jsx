@@ -203,7 +203,7 @@ function Export({id}){
     return(
   
         <>
-            <div className="export w-full flex flex-col gap-y-4  justify-center items-center">
+            <div className="home w-full flex flex-col gap-y-4  justify-center items-center">
                 <h1 className='text-2xl text-white font-medium  text-center  pb-5 w-1/3 animate-pulse'>Télécharger la Facture</h1>
                 <div className="flex items-center justify-center gap-x-16 w-1/2 h-1/2 bg-white/15  backdrop-blur-lg shadow-xl rounded-3xl  hover:animate-none">
                     <button onClick={printPDF}>
