@@ -1,12 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 *:hover{
     cursor:pointer;
     user-select: none;
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
 }
 html, body{
     @apply h-screen w-screen;
@@ -47,15 +45,19 @@ input[type='number']{
 }
 
 .export{
-    background: url('/src/assets/images/export.jpg');
+    background: url('/src/assets/images/bg.jpg');
 }
 .login{
     background: url('/src/assets/images/login.jpg');
 }
+.fallback{
+    background:url('/src/assets/images/fallback.png');
+}
 .home,
 .container,
 .export,
-.login{
+.login,
+.fallback{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -73,10 +75,6 @@ table{
 
 table{
     @apply  bg-white/5  backdrop-blur-lg shadow-lg rounded-2xl rounded-t-3xl
-}
-
-table tr{
-    @apply hover:font-medium
 }
 
 .dt-search{

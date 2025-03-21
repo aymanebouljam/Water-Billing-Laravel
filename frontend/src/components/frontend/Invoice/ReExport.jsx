@@ -212,9 +212,7 @@ function ReExport(){
     
     return(
   
-        <div className='container flex flex-col items-center justify-center py-12'>
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900"></div>
-
+        <div className='fallback w-screen flex flex-col items-center justify-center py-12'>
             <table className='w-full hidden' id='invoiceTable'>
                 <thead>
                     <tr>
