@@ -9,7 +9,7 @@
     font-optical-sizing: auto;
 }
 html, body{
-    @apply h-screen w-screen ;
+    @apply h-screen w-screen;
 }
 #root{
     @apply w-full h-full;
@@ -62,7 +62,7 @@ input[type='number']{
 }
 
 table, th, td{
-    @apply border-2 border-collapse;
+    @apply border-none border-collapse text-center;
 }
 table{
     @apply w-full;
@@ -71,11 +71,11 @@ table{
     @apply text-red-600 font-medium px-3 py-1;
 }
 
-table.dataTable{
-    @apply   bg-white/5  backdrop-blur-lg shadow-lg rounded-2xl rounded-t-3xl
+table{
+    @apply  bg-white/5  backdrop-blur-lg shadow-lg rounded-2xl rounded-t-3xl
 }
 
-table.dataTable tr{
+table tr{
     @apply hover:font-medium
 }
 
