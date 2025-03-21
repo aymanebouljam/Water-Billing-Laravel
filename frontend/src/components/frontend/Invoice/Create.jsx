@@ -141,7 +141,7 @@ function Create(){
     if(invoiceID === null){
     return(
         <div className="container">  
-           <form onSubmit={handleSubmit} className="h-full flex flex-col bg-white/5  backdrop-blur-lg shadow-lg w-1/2 p-6 animate-pulse hover:animate-none">
+           <form onSubmit={handleSubmit} className="h-full flex flex-col bg-white/5  backdrop-blur-lg shadow-lg w-1/2 p-6">
                 <input type="text" id="client" name="client" className="input" placeholder="Nom complet du client" onChange={handleChange} value={formData.client}/>
                 {
                     showError('client')
