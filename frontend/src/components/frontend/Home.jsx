@@ -2,7 +2,7 @@ import Logo from '../../assets/images/logo2.png'
 function Home(){
     return(
         <>
-      <style jsx>{`
+      <style>{`
         .home {
           position: relative;
           overflow: hidden;
